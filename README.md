@@ -27,37 +27,6 @@ Kullanıcı *"şunu yapmam lazım ama başlayamıyorum"* dediğinde ürün ona p
 
 TaskBreak AI bir tedavi veya klinik araç değildir; günlük görev başlatmayı kolaylaştıran bir yardımcıdır.
 
-Detaylı konumlandırma, çekirdek deneyim akışı, MVP kapsamı, gelir modeli ve risk analizi için: 📄 [docs/UrunStratejisi.md](docs/UrunStratejisi.md)
-
-#### ✨ Ürün Özellikleri
-* **Donma Anı Akışı:** Tek giriş → tek mikro hareket kartı → sayaç → kapanış. Her ekranda kullanıcının vereceği en fazla **bir** karar vardır; pano, liste ve istatistik yoktur.
-* **İlk Hareket Üretici (AI Agent):** Dağınık görev tarifini, katı bir çıktı sözleşmesiyle (fiil + nesne + ≤2 dk + fiziksel) tek bir somut harekete çevirir. Asla liste üretmez.
-* **"Bu Bile Fazla" Küçültücü:** Her hareket tek dokunuşla daha da küçültülebilir — hayır demenin utançsız yolu. En dipte "sadece masaya otur" seviyesine kadar iner.
-* **Ton Bekçisi (AI Agent):** Üretilen her metni yargısız dil ilkelerine göre denetleyen ikinci ajan. Utanç/erteleme döngüsünü tetikleyen dil ("neden hâlâ...", "geç kaldın") ürüne teknik olarak giremez.
-* **Body Doubling + Görünür Geri Sayım:** Sakin, eşlik eden bir sayaç ekranı; süre dolduğunda yargı değil, "uzatalım mı, küçültelim mi?" sorusu gelir.
-* **Tanışma Sohbeti (Chatbot):** Kullanıcı, kendisini bu tür işlerde neyin bıktırdığını ve kendisiyle nasıl konuşulmasını istediğini kısa bir sohbetle anlatır; cevaplar kişisel profile işlenir. Sohbet bilinçli olarak donma anı akışının dışında tutulur — donmuş bir kullanıcıya açık uçlu sohbet, bilişsel yük ilkesini ihlal eder.
-* **Akıllı Hafıza (AI Memory):** Kullanıcının beyan ettiği profil (bıktıran durumlar, ton tercihi) ile davranışsal kalıpları (hangi görev türlerinde donduğu, hangi küçüklükteki hareketlerin işe yaradığı) birleştirir; ilk hareketleri ve konuşma tonunu kişiye göre ayarlar.
-
-#### 🎯 Hedef Kitle
-Görev başlatma güçlüğü (task initiation) yaşayan **ADHD'li yetişkinler**:
-* "Başlayamamayı" bir kişilik kusuru değil, tanımlı bir nörolojik mekanizma olarak yaşayanlar
-* Çözüm için halihazırda harcama yapanlar (koçluk, uygulama, terapi)
-* Mevcut araçların (Todoist, Notion, Things) "zaten organize olabilen insanı" varsaydığı için hayal kırıklığına uğrayanlar
-* Yüzeysel "ADHD pazarlamasını" anında eleyen, gerçekten işe yarayan ürün arayan profesyoneller
-
-#### 🛠️ Teknolojiler
-* **Arayüz:** Streamlit (Python)
-* **Yapay Zeka:** LLM API üzerinde iki ajanlı orkestrasyon — İlk Hareket Üretici + Ton Bekçisi — ve çıktı sözleşmesi doğrulaması
-* **Hafıza:** Başlatma geçmişi, donma kalıpları ve küçültme tercihleri için JSON/SQLite tabanlı kalıcı hafıza
-* **Yayına Alma:** Streamlit Community Cloud + PWA/ana ekran kısayolu (Sprint 3 hedefi)
-
----
-
-### 📊 Proje Yönetimi ve Takip
-
-* **Product Backlog:** [docs/ProductBacklog.md](docs/ProductBacklog.md) — 300 puanlık backlog, Fibonacci puanlamasıyla 3 sprint'e dağıtılmıştır.
-* **Ürün Stratejisi:** [docs/UrunStratejisi.md](docs/UrunStratejisi.md)
-
 ---
 
 ### 📈 Sprint Günlükleri ve Kanıtlar
