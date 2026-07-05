@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskBreak AI – Prototip</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',system-ui,sans-serif; }
+  body { background:linear-gradient(160deg,#f5f3ff 0%,#eff6ff 100%); min-height:100vh; color:#1e1b4b; }
+  header { background:#ffffffcc; backdrop-filter:blur(8px); padding:16px 32px; display:flex; align-items:center; gap:12px; border-bottom:1px solid #e0e7ff; }
+  header .logo { font-size:26px; }
+  header h1 { font-size:20px; font-weight:700; }
+  header .tagline { font-size:12px; color:#6b7280; margin-left:4px; }
+  header .badge { margin-left:auto; background:#eef2ff; color:#4f46e5; font-size:12px; padding:4px 12px; border-radius:999px; font-weight:600; white-space:nowrap; }
+  main { max-width:640px; margin:40px auto; padding:0 20px; }
+  .card { background:#fff; border-radius:20px; padding:28px; box-shadow:0 4px 28px rgba(79,70,229,.09); margin-bottom:20px; }
+  .card h2 { font-size:18px; margin-bottom:14px; color:#4338ca; }
+  textarea { width:100%; min-height:96px; border:2px solid #e0e7ff; border-radius:14px; padding:14px; font-size:15px; resize:vertical; outline:none; }
+  textarea:focus { border-color:#6366f1; }
+  .btn { border:none; border-radius:14px; font-size:15px; font-weight:600; cursor:pointer; padding:14px 24px; }
+  .btn.primary { background:#4f46e5; color:#fff; width:100%; margin-top:14px; }
+  .btn.primary:hover { background:#4338ca; }
+  .btn.soft { background:#f1f5f9; color:#475569; }
+  .btn.soft:hover { background:#e2e8f0; }
+  .kicker { font-size:12px; text-transform:uppercase; letter-spacing:1px; color:#8b5cf6; font-weight:700; margin-bottom:10px; }
+  .move { font-size:20px; line-height:1.5; font-weight:700; color:#1e1b4b; }
+  .chip { display:inline-block; margin-top:12px; font-size:13px; font-weight:700; color:#4f46e5; background:#eef2ff; padding:4px 14px; border-radius:999px; }
+  .context { margin-top:16px; font-size:14px; line-height:1.6; color:#166534; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:14px; }
+  .actions { display:flex; gap:10px; margin-top:20px; }
+  .actions .btn { flex:1; }
+  .hidden { display:none; }
+  /* Sayaç ekranı */
+  .timer-screen { text-align:center; padding:48px 28px; }
+  .pulse { width:14px; height:14px; border-radius:50%; background:#8b5cf6; margin:0 auto 24px; animation:pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(1.8);opacity:1} }
+  .countdown { font-size:64px; font-weight:800; color:#4338ca; letter-spacing:2px; font-variant-numeric:tabular-nums; }
+  .doing { margin-top:10px; font-size:15px; color:#6b7280; }
+  .companion { margin-top:22px; font-size:15px; color:#7c3aed; font-style:italic; }
+  .timer-screen .btn.primary { max-width:320px; margin:28px auto 0; display:block; }
+  .pauselink { display:inline-block; margin-top:14px; font-size:13px; color:#9ca3af; text-decoration:underline; cursor:pointer; }
+  /* Kapanış */
+  .closure { text-align:center; padding:40px 28px; }
+  .closure .big { font-size:40px; }
+  .closure h2 { color:#166534; margin-top:12px; }
+  .closure p { margin-top:8px; font-size:14px; color:#6b7280; }
+  footer { text-align:center; font-size:12px; color:#9ca3af; padding:24px; line-height:1.7; }
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">🧩</span>
+  <h1>TaskBreak AI</h1>
+  <span class="tagline">görevi değil, donmayı kırar</span>
+  <span class="badge">Prototip · Sprint 1</span>
+</header>
+<main>
+
+  <!-- EKRAN 1: Giriş -->
+  <div class="card" id="screenInput">
+    <h2>Şu an ne yapman gerekiyor?</h2>
+    <textarea id="taskInput" placeholder="Dağınık yazabilirsin, sorun değil...">Vergi beyannamemi doldurmam lazım. Üç gündür erteliyorum, dosyaya bakamıyorum bile.</textarea>
+    <button class="btn primary" onclick="showCard()">Bana ilk hareketi ver</button>
+  </div>
+
+  <!-- EKRAN 2: İlk Hareket Kartı -->
+  <div class="card hidden" id="screenCard">
+    <div class="kicker">Plan yok · Liste yok · Sadece şu</div>
+    <div class="move" id="moveText">Sadece bilgisayarında vergi klasörünü aç ve içine bak. Başka hiçbir şey yapma.</div>
+    <span class="chip">⏱ ≈ 2 dk</span>
+    <div class="context">Üç gündür ertelemen tembellik değil — beynin görevi tek büyük blok olarak görüyor. Biz sadece kapıyı aralıyoruz. 🌱</div>
+    <div class="actions">
+      <button class="btn primary" onclick="startTimer()">Başlıyorum</button>
+      <button class="btn soft" onclick="shrink()">Bu bile fazla → küçült</button>
+    </div>
+  </div>
+
+  <!-- EKRAN 3: Sayaç + Body Doubling -->
+  <div class="card timer-screen hidden" id="screenTimer">
+    <div class="pulse"></div>
+    <div class="countdown" id="countdown">2:00</div>
+    <div class="doing" id="doingText">Sadece klasörü açıyorsun, hepsi bu.</div>
+    <div class="companion">Buradayım, seninle bekliyorum.</div>
+    <button class="btn primary" onclick="finish()">Yaptım ✓</button>
+    <span class="pauselink">duraklat</span>
+  </div>
+
+  <!-- EKRAN 4: Kapanış -->
+  <div class="card closure hidden" id="screenClosure">
+    <div class="big">🌱</div>
+    <h2>İlk hareket tamam. Donma kırıldı.</h2>
+    <p>Başlamış olman bugünün işiydi.</p>
+    <div class="actions">
+      <button class="btn primary" onclick="location.reload()">Sıradaki mini hareketi ver</button>
+      <button class="btn soft" onclick="location.reload()">Bugünlük yeter</button>
+    </div>
+  </div>
+
+</main>
+<footer>
+  TaskBreak AI · MicroMinds · YZTA Bootcamp 2026 · Bu ekran, Sprint 1 arayüz prototipidir (demo verisiyle çalışır).<br>
+  TaskBreak AI bir tedavi veya klinik araç değildir; günlük görev başlatmayı kolaylaştıran bir yardımcıdır.
+</footer>
+<script>
+const smallerMoves = [
+  { move: "Sadece bilgisayarını uyandır ve masaüstünü aç. Klasöre bakman bile gerekmiyor.", doing: "Sadece bilgisayarı uyandırıyorsun." },
+  { move: "Sadece telefonu elinden bırak ve masana otur. Hepsi bu.", doing: "Sadece masaya oturuyorsun." }
+];
+let shrinkLevel = 0;
+function show(id) {
+  ['screenInput','screenCard','screenTimer','screenClosure'].forEach(s =>
+    document.getElementById(s).classList.toggle('hidden', s !== id));
+}
+function showCard() { show('screenCard'); }
+function shrink() {
+  if (shrinkLevel < smallerMoves.length) {
+    document.getElementById('moveText').textContent = smallerMoves[shrinkLevel].move;
+    document.getElementById('doingText').textContent = smallerMoves[shrinkLevel].doing;
+    shrinkLevel++;
+  }
+}
+let remaining = 120, timerId = null;
+function startTimer() {
+  show('screenTimer');
+  timerId = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) { clearInterval(timerId); remaining = 0; }
+    const m = Math.floor(remaining / 60), s = String(remaining % 60).padStart(2, '0');
+    document.getElementById('countdown').textContent = m + ':' + s;
+  }, 1000);
+}
+function finish() { clearInterval(timerId); show('screenClosure'); }
+// Ekran görüntüsü/demo kısayolları: ?demo=card | ?demo=timer | ?demo=done
+const demo = new URLSearchParams(location.search).get('demo');
+if (demo === 'card') { showCard(); }
+if (demo === 'timer') { show('screenTimer'); document.getElementById('countdown').textContent = '1:37'; }
+if (demo === 'done') { show('screenClosure'); }
+</script>
+</body>
+</html>
