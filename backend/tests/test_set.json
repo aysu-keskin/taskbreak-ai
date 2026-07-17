@@ -1,0 +1,15 @@
+{
+  "_aciklama": "50 gerçek, dağınık görev tarifi hedefi (backlog #8 — sahibi: Buğra). Bu 10 tanesi başlangıç örneğidir; Buğra 50'ye tamamlayacak. Kategoriler dengeli olsun: ev, burokrasi, is_okul, sosyal, saglik. Her tarif GERÇEKÇİ ve dağınık olmalı — 'temizlik yap' değil, 'evi toplamam lazım ama nereden başlayacağımı bilmiyorum' gibi.",
+  "gorevler": [
+    { "id": 1, "kategori": "burokrasi", "metin": "vergi beyannamem var, üç gündür bakamıyorum bile" },
+    { "id": 2, "kategori": "ev", "metin": "evi toplamam lazım ama nereden başlayacağımı bilmiyorum, her yer felaket" },
+    { "id": 3, "kategori": "is_okul", "metin": "maile dönmem gerekiyordu, 2 hafta oldu, artık bakmaya utanıyorum" },
+    { "id": 4, "kategori": "is_okul", "metin": "bitirme projem duruyor öylece, dosyayı açamıyorum bile" },
+    { "id": 5, "kategori": "sosyal", "metin": "arkadaşımın mesajına cevap yazacaktım, günler geçti, şimdi ne desem bilmiyorum" },
+    { "id": 6, "kategori": "saglik", "metin": "diş randevusu almam lazım aylardır, telefonu elime alıp arayamıyorum" },
+    { "id": 7, "kategori": "ev", "metin": "çamaşırlar üç gündür makinede, katlanacak dağ gibi kıyafet var" },
+    { "id": 8, "kategori": "burokrasi", "metin": "ehliyet yenileme işlemi var, hangi belgeler lazım ona bile bakamadım" },
+    { "id": 9, "kategori": "is_okul", "metin": "yarın sunum var ve daha slaytları açmadım, düşününce midem bulanıyor" },
+    { "id": 10, "kategori": "ev", "metin": "taşınmadan kalan kutular iki aydır salonda duruyor, bakamıyorum" }
+  ]
+}

@@ -1,0 +1,6 @@
+# TaskBreak AI backend — Python STANDART KÜTÜPHANESİYLE çalışır, dış paket YOK.
+#
+# Not: Bu makinedeki Python 3.13.13, FastAPI + uvicorn + pydantic_core ile
+# native crash (access violation) verdiği için backend, stdlib http.server +
+# Gemini REST (urllib) mimarisine geçirildi. Bu yüzden kurulacak paket kalmadı.
+# Dosya bilerek boş bırakıldı ki kurulum.bat sorunsuz çalışsın.

@@ -1,0 +1,178 @@
+/* Başlangıç stilleri — sahibi: Yeliz (backlog #3/#5/#6 cila alanı).
+   Amaç: sakin, düşük uyaranlı, mobil öncelikli. Şu an SADE; güzelleştirme Yeliz'in işi.
+   İlke: ekran başına tek karar; göz yorucu renk/animasyon yok. */
+
+:root {
+  --arka: #f3f1ea;
+  --kart: #ffffff;
+  --metin: #2b2b2b;
+  --yumusak: #6b6b6b;
+  --vurgu: #4a7c59;
+  --vurgu-koyu: #3a6347;
+  --kenar: #e2ded3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--arka);
+  color: var(--metin);
+}
+
+.ekran-cerceve {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.ekran {
+  width: 100%;
+  max-width: 460px;
+  text-align: center;
+}
+
+.ekran h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+
+textarea {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  border: 1px solid var(--kenar);
+  border-radius: 12px;
+  resize: vertical;
+  font-family: inherit;
+  background: var(--kart);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.birincil {
+  background: var(--vurgu);
+  color: #fff;
+}
+
+.birincil:hover:not(:disabled) {
+  background: var(--vurgu-koyu);
+}
+
+.ikincil {
+  background: transparent;
+  color: var(--yumusak);
+  border: 1px solid var(--kenar);
+}
+
+.dugmeler {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+form .birincil {
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* Hareket kartı */
+.hareket-karti {
+  background: var(--kart);
+  border: 1px solid var(--kenar);
+  border-radius: 18px;
+  padding: 28px 24px;
+}
+
+.sure-rozet {
+  display: inline-block;
+  background: var(--arka);
+  color: var(--yumusak);
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.hareket {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 0 0 16px;
+}
+
+.baglam {
+  color: var(--yumusak);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Sayaç / body doubling — "nefes alan" halka (Yeliz güzelleştirir) */
+.nefes-halka {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: var(--kart);
+  border: 2px solid var(--vurgu);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: nefes 4s ease-in-out infinite;
+}
+
+@keyframes nefes {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.geri-sayim {
+  font-size: 2.6rem;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
+
+.eslik {
+  color: var(--yumusak);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* Kapanış */
+.kutlama {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.alt-not {
+  color: var(--yumusak);
+  margin-top: 20px;
+}
+
+.hata {
+  color: #a3502f;
+  margin-top: 16px;
+}

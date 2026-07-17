@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Gizli anahtarlar — ASLA commit'lenmez
+backend/.env
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Kullanıcı verisi (yerel oturum kayıtları)
+backend/data/
