@@ -176,3 +176,68 @@ form .birincil {
   color: #a3502f;
   margin-top: 16px;
 }
+
+/* Tanışma Sohbeti (backlog #2) — donma anı akışının dışında.
+   Aynı sakin dil: düşük uyaran, büyük dokunma alanı, mobil öncelikli. */
+.adim-sayaci {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+.secenekler {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.secenekler.dikey {
+  flex-direction: column;
+}
+
+.secenek {
+  padding: 12px 18px;
+  min-height: 48px; /* telefonda rahat dokunma alanı */
+  border: 1px solid var(--kenar);
+  border-radius: 10px;
+  background: var(--kart);
+  color: var(--metin);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.secenek.secili {
+  border-color: var(--vurgu);
+  background: var(--vurgu);
+  color: #fff;
+}
+
+.secenek.genis {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  padding: 16px 18px;
+}
+
+.secenek.genis span {
+  color: var(--yumusak);
+  font-size: 0.9rem;
+}
+
+.secenek.genis:hover strong {
+  color: var(--vurgu-koyu);
+}
+
+/* "Şimdi değil" — görünür ama sessiz; asla ana eylemle yarışmaz. */
+.atla {
+  margin-top: 24px;
+  border: none;
+  background: none;
+  color: var(--yumusak);
+  font-size: 0.95rem;
+  text-decoration: underline;
+  cursor: pointer;
+}

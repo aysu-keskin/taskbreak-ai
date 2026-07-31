@@ -1,20 +1,58 @@
 import { useState } from "react";
+import Onboarding from "./screens/Onboarding.jsx";
 import Entry from "./screens/Entry.jsx";
 import MoveCard from "./screens/MoveCard.jsx";
 import Timer from "./screens/Timer.jsx";
 import Closing from "./screens/Closing.jsx";
-import { ilkHareket, kucult, oturumKaydet } from "./api.js";
+import { ilkHareket, kucult, oturumKaydet, profilKaydet } from "./api.js";
+
+// Tanışma Sohbeti'nin bir kez sorulduğunu tutan yerel bayrak.
+// Backend'e sormuyoruz: donma anındaki kullanıcı ağ yanıtı beklemesin diye.
+const TANISMA_ANAHTARI = "taskbreak_tanisma";
+
+// localStorage bazı gizlilik modlarında hata fırlatır; ürün bu yüzden çökmemeli.
+function tanismaDurumu() {
+  try {
+    return localStorage.getItem(TANISMA_ANAHTARI);
+  } catch {
+    return "atlandi"; // erişemiyorsak sormayı denemeyiz, akışı bloke etmeyiz
+  }
+}
+
+function tanismaIsaretle(deger) {
+  try {
+    localStorage.setItem(TANISMA_ANAHTARI, deger);
+  } catch {
+    /* yazamazsak sorun değil — kullanıcı bir kez daha karşılaşır, akış bozulmaz */
+  }
+}
 
 // Donma anı akışının yönetimi (sahibi: Aysu — iskelet).
 // Ekranların İÇİ Yeliz'in cila alanı; buradaki geçiş mantığı ortak sözleşmedir.
-// Akış: giris -> kart -> sayac -> kapanis -> (döngü ya da bitiş)
+// Akış: (tanisma) -> giris -> kart -> sayac -> kapanis -> (döngü ya da bitiş)
 export default function App() {
-  const [ekran, setEkran] = useState("giris");
+  const [ekran, setEkran] = useState(() =>
+    tanismaDurumu() ? "giris" : "tanisma"
+  );
   const [gorev, setGorev] = useState("");
   const [kart, setKart] = useState(null);
   const [kucultmeSayisi, setKucultmeSayisi] = useState(0);
   const [yukleniyor, setYukleniyor] = useState(false);
   const [hataMesaji, setHataMesaji] = useState(null);
+
+  // Tanışma Sohbeti bitti — profili kaydet ve bir daha sorma.
+  // profilKaydet hatayı yutar; kayıt başarısız olsa bile kullanıcı akışta kalır.
+  function tanismaTamam(profil) {
+    profilKaydet(profil);
+    tanismaIsaretle("tamam");
+    setEkran("giris");
+  }
+
+  // "Şimdi değil" — profil kaydedilmez, bir daha sorulmaz.
+  function tanismaAtla() {
+    tanismaIsaretle("atlandi");
+    setEkran("giris");
+  }
 
   // Giriş ekranından görev gelince ilk hareketi iste.
   async function gorevGonder(metin) {
@@ -89,6 +127,9 @@ export default function App() {
 
   return (
     <main className="ekran-cerceve">
+      {ekran === "tanisma" && (
+        <Onboarding onTamam={tanismaTamam} onAtla={tanismaAtla} />
+      )}
       {ekran === "giris" && (
         <Entry onGonder={gorevGonder} yukleniyor={yukleniyor} hata={hataMesaji} />
       )}
