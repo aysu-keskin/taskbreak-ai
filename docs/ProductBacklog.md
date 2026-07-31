@@ -7,7 +7,7 @@ Puanlama **Fibonacci dizisi (1, 2, 3, 5, 8, 13, 21)** kullanılarak yapılmışt
 |--------|-------|------|
 | Sprint 1 | Keşif ve Ürün Tanımı | 100 |
 | Sprint 2 | Çalışan MVP (Donma Anı Akışı + AI Ajanları) | 100 |
-| Sprint 3 | Kişiselleştirme, Yayına Alma ve Teslim | 100 |
+| Sprint 3 | Kişiselleştirme ve Teslim | 100 *(revize: 92)* |
 
 ---
 
@@ -51,17 +51,19 @@ Puanlama **Fibonacci dizisi (1, 2, 3, 5, 8, 13, 21)** kullanılarak yapılmışt
 
 ## 🎯 Sprint 3 – Kişiselleştirme ve Teslim (20 Temmuz – 2 Ağustos)
 
+> **Kapsam revizyonu (#5):** Sprint 1'de "Streamlit Community Cloud'a yayına alma" olarak planlanan iş, teknoloji kararının React + Python stdlib mimarisine geçmesi ve kalan sürenin ürünün yapay zekâ tarafına ayrılması gerekçesiyle **"canlıya alınabilirlik hazırlığı"** olarak yeniden tanımlanmıştır (13 → 5 puan). Kılavuz canlı linki opsiyonel tutmakta (s.24), değerlendirme kriteri ise *"canlıya alınmış **veya** canlıya alınabilecek şekilde geliştirilme yapılmış"* şeklindedir (s.25). Canlıya alma, bootcamp sonrası yol haritasına taşınmıştır. Ayrıntı: [sprint3/Sprint3_Gorev_Plani.md](sprint3/Sprint3_Gorev_Plani.md)
+
 | # | User Story / İş | Puan | Durum |
 |---|-----------------|------|-------|
 | 1 | Akıllı Hafıza ile kişiselleştirme: kullanıcının **beyan ettiği profil** (bıktıran durumlar) + davranışsal donma kalıplarına göre ilk hareketin boyutunun ve içeriğinin otomatik ayarlanması | 21 | 🔜 Planlandı |
 | 2 | Bir kullanıcı olarak beni neyin bıktırdığını ve benimle nasıl konuşulmasını istediğimi kısa bir sohbetle anlatmak istiyorum (**Tanışma Sohbeti** — 3 soruluk chatbot onboarding + kullanıcı profili kaydı; donma anı akışının dışında tutulur) | 13 | 🔜 Planlandı |
 | 3 | Ton profili: Ton Bekçisi'nin kullanıcının seçtiği konuşma tarzına (kısa/net, sıcak/eşlikçi) uyarlanması — yasaklı yargı dili tabanı hiçbir tercihte esnemez | 8 | 🔜 Planlandı |
 | 4 | Deneyim iyileştirmeleri ve bilişsel yük denetimi (ekran başına en fazla bir karar ilkesinin doğrulanması) | 8 | 🔜 Planlandı |
-| 5 | Canlıya alma: Streamlit Community Cloud + ana ekran kısayolu ile sıfır sürtünmeli erişim | 13 | 🔜 Planlandı |
+| 5 | Canlıya alınabilirlik hazırlığı: sunucu yapılandırmasının ortam değişkenlerine taşınması ve deploy talimatının belgelenmesi *(revize — bkz. yukarıdaki not)* | 5 | 🔜 Planlandı |
 | 6 | Uçtan uca test ve hata düzeltmeleri | 8 | 🔜 Planlandı |
 | 7 | 3 dakikalık tanıtım videosunun hazırlanması ve YouTube'a yüklenmesi | 13 | 🔜 Planlandı |
 | 8 | Final dokümantasyon (mimari, kurulum, kullanım) | 8 | 🔜 Planlandı |
 | 9 | Ürün Teslim Formu'nun doldurulması ve son kontroller | 5 | 🔜 Planlandı |
 | 10 | Fiyatlandırma sayfası (mock) ve gelecek vizyonunun belgelenmesi (B2B/EAP kanalı, entegrasyonlar) | 3 | 🔜 Planlandı |
 
-**Sprint 3 Toplam: 100 puan**
+**Sprint 3 Toplam: 92 puan** *(planlanan 100; #5'teki kapsam revizyonu sonrası)*
