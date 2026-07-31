@@ -15,6 +15,7 @@ from agents import prompts
 from agents.client import json_uret
 from agents.tone_guard import kart_denetle
 from models import sozlesme_ihlalleri
+from personalization import baslangic_kademesi
 
 MAX_DENEME = 3
 
@@ -43,15 +44,26 @@ def _sozlesmeli_uret(istem: str) -> dict:
     raise RuntimeError("Sözleşmeye uygun hareket üretilemedi: " + "; ".join(son_ihlaller))
 
 
-def ilk_hareket(gorev: str, onceki_hareket: str | None = None) -> dict:
+def ilk_hareket(
+    gorev: str,
+    onceki_hareket: str | None = None,
+    profil: dict | None = None,
+    oturumlar: list | None = None,
+) -> dict:
     """Dağınık görev metnini tek mikro harekete çevirir.
 
     onceki_hareket doluysa "sıradaki mini hareket" modunda çalışır
     (kapanış ekranındaki momentum döngüsü).
+
+    profil ve oturumlar verildiğinde hareketin BAŞLANGIÇ boyutu kişiselleştirilir
+    (backlog #1). Verilmezse kademe 0 çıkar ve ürün Sprint 2'deki gibi davranır —
+    yani kişiselleştirme hiçbir koşulda akışı bloke etmez.
     """
-    kart = _sozlesmeli_uret(prompts.ilk_hareket_istemi(gorev, onceki_hareket))
+    kisisel = baslangic_kademesi(gorev, profil, oturumlar)
+    kart = _sozlesmeli_uret(prompts.ilk_hareket_istemi(gorev, onceki_hareket, kisisel))
     kart = kart_denetle(kart)  # Ton Bekçisi — orkestrasyondaki ikinci ajan
     kart["kaynak"] = "ai"
+    kart["kisisellestirme"] = kisisel  # arayüzde gösterilmez; test ve demo için
     return kart
 
 

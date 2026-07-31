@@ -20,7 +20,7 @@ KESİN KURALLAR:
 Görev: "vergi beyannamem var, üç gündür bakamıyorum bile"
 Çıktı: {"hareket": "Sadece bilgisayarında vergi klasörünü aç ve içine bak. Başka hiçbir şey yapma.", "sure_dk": 2, "baglam": "Üç gündür ertelemen tembellik değil — beynin görevi tek büyük blok olarak görüyor. Biz sadece kapıyı aralıyoruz."}
 
-Kullanıcının görevi: "<<GOREV>>"
+<<KISISELLESTIRME>>Kullanıcının görevi: "<<GOREV>>"
 <<ONCEKI>>"""
 
 _KUCULT = """Sen TaskBreak AI'ın "İlk Hareket Üretici" ajanısın ve şu an KÜÇÜLTME modundasın. Kullanıcı "Bu bile fazla" düğmesine bastı: verilen hareket bile şu anda ona ağır geldi. Bu bir başarısızlık DEĞİL — bu düğme ürünün kalbi, hayır demenin utançsız yolu.
@@ -51,14 +51,49 @@ Kurallar: "hareket" yine TEK hareket, fiil + somut nesne, en fazla 2 dk olmalı;
 ÇIKTI (yalnızca JSON): {"hareket": "...", "sure_dk": <<SURE>>, "baglam": "..."}"""
 
 
-def ilk_hareket_istemi(gorev: str, onceki_hareket: str | None = None) -> str:
+# Kişiselleştirme kademesinin prompt karşılığı (backlog #1).
+# Kademe 0'da hiçbir şey eklenmez — ürün Sprint 2'deki gibi davranır.
+# Gerekçeler BİLEREK prompt'a konmaz: modele girmesi, "senin bürokrasi sorunun
+# var" gibi bir cümlenin bağlam metnine sızma riski yaratır.
+_KADEME_TALIMATLARI = {
+    1: "BAŞLANGIÇ BOYUTU: Bu kullanıcı için hareketi normalden biraz daha küçük tut.",
+    2: "BAŞLANGIÇ BOYUTU: Bu kullanıcı için hareketi belirgin şekilde daha küçük tut — "
+       "tek bir nesneye dokunmak yeterli.",
+    3: "BAŞLANGIÇ BOYUTU — EN DİP SEVİYE: Bu kullanıcı şu an en zor halinde. "
+       "Hareket TEK bir bedensel jest olmalı ve görevin kendisine HİÇ dokunmamalı: "
+       "uygulama açtırma, belge açtırma, ekrana bir şey getirtme YOK. "
+       "'ve' ile bağlanan iki parçalı hareket YOK — tek fiil, tek nesne. "
+       "En fazla 1 dakika. "
+       "Örnek seviye: 'Sadece telefonu masaya bırak.' / 'Sadece sandalyene otur.' / "
+       "'Sadece klasörün durduğu çekmeceye elini koy.'",
+}
+
+
+def kisisellestirme_metni(kisisellestirme: dict | None) -> str:
+    """Kademeyi prompt'a eklenecek tek satırlık talimata çevirir."""
+    if not kisisellestirme:
+        return ""
+    kademe = int(kisisellestirme.get("kademe", 0) or 0)
+    talimat = _KADEME_TALIMATLARI.get(min(kademe, 3), "")
+    return talimat + "\n\n" if talimat else ""
+
+
+def ilk_hareket_istemi(
+    gorev: str,
+    onceki_hareket: str | None = None,
+    kisisellestirme: dict | None = None,
+) -> str:
     onceki = ""
     if onceki_hareket:
         onceki = (
             f'Kullanıcı az önce şu hareketi tamamladı: "{onceki_hareket}". '
             "Momentum sürüyor; aynı görev için SIRADAKİ 1-2 dakikalık tek mini hareketi ver."
         )
-    return _ILK_HAREKET.replace("<<GOREV>>", gorev).replace("<<ONCEKI>>", onceki)
+    return (
+        _ILK_HAREKET.replace("<<KISISELLESTIRME>>", kisisellestirme_metni(kisisellestirme))
+        .replace("<<GOREV>>", gorev)
+        .replace("<<ONCEKI>>", onceki)
+    )
 
 
 def kucult_istemi(gorev: str, mevcut_hareket: str, kucultme_sayisi: int) -> str:

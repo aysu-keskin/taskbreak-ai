@@ -84,7 +84,13 @@ class Handler(BaseHTTPRequestHandler):
 
         if self.path == "/api/first-move":
             try:
-                kart = ilk_hareket(govde.get("gorev", ""), govde.get("onceki_hareket"))
+                # Kişiselleştirme girdileri burada yüklenir: ajan modülü dosya okumaz.
+                kart = ilk_hareket(
+                    govde.get("gorev", ""),
+                    govde.get("onceki_hareket"),
+                    profil=user_profile.profil_getir(),
+                    oturumlar=memory.oturumlari_getir(),
+                )
             except Exception as hata:  # kullanıcı asla teknik hata görmez
                 log.exception("İlk hareket üretilemedi: %s", hata)
                 kart = yedek_kart()
