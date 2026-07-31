@@ -10,6 +10,8 @@ Uçlar:
 - POST /api/shrink     : mevcut hareket -> KESİN daha küçük hareket ("Bu bile fazla")
 - POST /api/sessions   : oturum kaydet (hafıza)
 - GET  /api/sessions   : oturum geçmişi
+- POST /api/profile    : kullanıcı profilini kaydet (Tanışma Sohbeti)
+- GET  /api/profile    : kullanıcı profilini getir
 
 Tasarım ilkesi: kullanıcı ASLA teknik hata görmez — her hata yolunda
 yargısız bir yedek kart döner (fallbacks.py).
@@ -19,6 +21,7 @@ import logging
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import memory
+import user_profile
 from agents.first_move import ilk_hareket, kucult
 from fallbacks import yedek_kart
 
@@ -67,6 +70,8 @@ class Handler(BaseHTTPRequestHandler):
             self._json(200, {"durum": "ok"})
         elif self.path == "/api/sessions":
             self._json(200, memory.oturumlari_getir())
+        elif self.path == "/api/profile":
+            self._json(200, user_profile.profil_getir())
         else:
             self._json(404, {"hata": "bulunamadı"})
 
@@ -99,6 +104,9 @@ class Handler(BaseHTTPRequestHandler):
 
         elif self.path == "/api/sessions":
             self._json(200, memory.oturum_kaydet(govde))
+
+        elif self.path == "/api/profile":
+            self._json(200, user_profile.profil_kaydet(govde))
 
         else:
             self._json(404, {"hata": "bulunamadı"})
