@@ -20,7 +20,17 @@ YASAKLI_KALIPLAR = [
     "keşke daha önce", "vaktinde yapsaydın", "yapman gerekirdi", "erteleme artık",
 ]
 
-_GUVENLI_BAGLAM = "Buradayım; şu an sadece bu küçük adıma birlikte bakıyoruz."
+# Son çare bağlam cümlesi — kullanıcının ton tercihine göre iki hali var.
+# Yeniden yazım başarısız olsa bile kullanıcı kendi seçtiği sesi duyar.
+_GUVENLI_BAGLAMLAR = {
+    "kisa_net": "Buradayım. Şimdilik sadece bu adım.",
+    "sicak_eslikci": "Buradayım; şu an sadece bu küçük adıma birlikte bakıyoruz.",
+}
+_VARSAYILAN_GUVENLI_BAGLAM = _GUVENLI_BAGLAMLAR["sicak_eslikci"]
+
+
+def _guvenli_baglam(ton: str | None) -> str:
+    return _GUVENLI_BAGLAMLAR.get(str(ton or ""), _VARSAYILAN_GUVENLI_BAGLAM)
 
 
 def ihlal_bul(metin: str) -> list[str]:
@@ -29,24 +39,29 @@ def ihlal_bul(metin: str) -> list[str]:
     return [k for k in YASAKLI_KALIPLAR if k.casefold() in kucuk]
 
 
-def kart_denetle(kart: dict) -> dict:
+def kart_denetle(kart: dict, ton: str | None = None) -> dict:
     """Kartın tüm metin alanlarını denetler; gerekirse yeniden yazdırır.
 
     2 yeniden yazım denemesi yapılır. Hâlâ temiz değilse: bağlam güvenli
     cümleyle değiştirilir; hareket metni temizlenemiyorsa hata fırlatılır
     (main.py yedek karta düşer — kirli metin asla ekrana ulaşmaz).
+
+    `ton` yalnızca yeniden yazımın ÜSLUBUNU belirler; yasaklı kalıp listesi
+    her tonda birebir aynı uygulanır.
     """
     for _ in range(2):
         sorunlar = ihlal_bul(str(kart.get("hareket", ""))) + ihlal_bul(str(kart.get("baglam", "")))
         if not sorunlar:
             return kart
         try:
-            kart = json_uret(prompts.ton_yeniden_yazim_istemi(kart, sorunlar, YASAKLI_KALIPLAR))
+            kart = json_uret(
+                prompts.ton_yeniden_yazim_istemi(kart, sorunlar, YASAKLI_KALIPLAR, ton)
+            )
         except Exception:
             break  # yeniden yazım başarısız — aşağıdaki son çare devreye girer
 
     if ihlal_bul(str(kart.get("baglam", ""))):
-        kart["baglam"] = _GUVENLI_BAGLAM
+        kart["baglam"] = _guvenli_baglam(ton)
     if ihlal_bul(str(kart.get("hareket", ""))):
         raise RuntimeError("Ton Bekçisi: hareket metni temizlenemedi — kart gösterilmeyecek")
     return kart

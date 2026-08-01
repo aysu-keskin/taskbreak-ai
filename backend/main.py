@@ -102,6 +102,7 @@ class Handler(BaseHTTPRequestHandler):
                     govde.get("gorev", ""),
                     govde.get("mevcut_hareket", ""),
                     int(govde.get("kucultme_sayisi", 0) or 0),
+                    profil=user_profile.profil_getir(),  # ton tercihi küçültmede de geçerli
                 )
             except Exception as hata:
                 log.exception("Küçültme üretilemedi: %s", hata)

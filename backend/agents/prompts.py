@@ -12,7 +12,9 @@ KESİN KURALLAR:
 3. En fazla 2 dakika sürmeli ve fiziksel olarak gözlemlenebilir olmalı.
 4. Görevi bitirmeyi değil, sadece KAPIYI ARALAMAYI hedefle.
 5. "baglam": bir cümlelik, yargısız, suçlamayan bir açıklama; kullanıcının zorluğunu normalleştir.
-6. Türkçe yaz. Sıcak ama abartısız bir dil kullan. Asla utandırma, asla acele ettirme.
+6. Türkçe yaz. Asla utandırma, asla acele ettirme.
+
+<<TON>>
 
 ÇIKTI (yalnızca JSON): {"hareket": "...", "sure_dk": <sayı, en fazla 2>, "baglam": "..."}
 
@@ -35,6 +37,8 @@ KESİN KURALLAR:
 3. Asla "bu zaten kolaydı" imasında bulunma. "baglam" cümlesi küçülmeyi normalleştirsin ("Küçültmek vazgeçmek değil — kapıyı daha az zorlayarak açıyoruz.").
 4. Diğer tüm kurallar aynı: TEK hareket, fiil + somut nesne, en fazla 2 dk, asla liste, asla tavsiye, Türkçe, yargısız.
 
+<<TON>>
+
 ÇIKTI (yalnızca JSON): {"hareket": "...", "sure_dk": <sayı, en fazla 2>, "baglam": "..."}"""
 
 _TON_YENIDEN_YAZIM = """Sen TaskBreak AI'ın "Ton Bekçisi" ajanısın. Aşağıdaki kart metinlerinde yargılayıcı, utandırıcı veya baskı kuran dil tespit edildi. Görevin: ANLAMI ve hareketi koruyarak metinleri tamamen yargısız, suçlamayan, sıcak ama abartısız bir Türkçeyle YENİDEN yazmak.
@@ -48,6 +52,9 @@ hareket: "<<HAREKET>>"
 baglam: "<<BAGLAM>>"
 
 Kurallar: "hareket" yine TEK hareket, fiil + somut nesne, en fazla 2 dk olmalı; anlamı değiştirme, sadece dili temizle.
+
+<<TON>>
+
 ÇIKTI (yalnızca JSON): {"hareket": "...", "sure_dk": <<SURE>>, "baglam": "..."}"""
 
 
@@ -69,6 +76,27 @@ _KADEME_TALIMATLARI = {
 }
 
 
+# Ton profili (backlog #3) — kullanıcının Tanışma Sohbeti'nde seçtiği konuşma tarzı.
+#
+# ÖNEMLİ: Ton yalnızca ÜSLUBU değiştirir. Yargısızlık ve yasaklı dil sınırı
+# (tone_guard.YASAKLI_KALIPLAR) hiçbir tercihte esnemez — bu bir ürün kararıdır.
+_TON_TALIMATLARI = {
+    "kisa_net": "ÜSLUP: Kısa ve net konuş. Bağlam cümlesi en fazla 12 kelime olsun; "
+                "süsleme, benzetme, uzun açıklama yok. Yine yargısız ve sıcak, ama tok.",
+    "sicak_eslikci": "ÜSLUP: Sıcak ve eşlikçi konuş: kullanıcı yanında biri varmış gibi "
+                     "hissetsin. Bağlam cümlesi tek cümle ama kapsayıcı olsun; yine de "
+                     "abartma, acıma diline kaçma.",
+}
+
+# Profil yoksa veya tanışma atlandıysa ürünün varsayılan sesi.
+_VARSAYILAN_TON = "ÜSLUP: Sıcak ama abartısız bir dil kullan."
+
+
+def ton_metni(ton_tercihi: str | None) -> str:
+    """Ton tercihini prompt talimatına çevirir; bilinmeyen değer varsayılana düşer."""
+    return _TON_TALIMATLARI.get(str(ton_tercihi or ""), _VARSAYILAN_TON)
+
+
 def kisisellestirme_metni(kisisellestirme: dict | None) -> str:
     """Kademeyi prompt'a eklenecek tek satırlık talimata çevirir."""
     if not kisisellestirme:
@@ -82,6 +110,7 @@ def ilk_hareket_istemi(
     gorev: str,
     onceki_hareket: str | None = None,
     kisisellestirme: dict | None = None,
+    ton: str | None = None,
 ) -> str:
     onceki = ""
     if onceki_hareket:
@@ -91,24 +120,37 @@ def ilk_hareket_istemi(
         )
     return (
         _ILK_HAREKET.replace("<<KISISELLESTIRME>>", kisisellestirme_metni(kisisellestirme))
+        .replace("<<TON>>", ton_metni(ton))
         .replace("<<GOREV>>", gorev)
         .replace("<<ONCEKI>>", onceki)
     )
 
 
-def kucult_istemi(gorev: str, mevcut_hareket: str, kucultme_sayisi: int) -> str:
+def kucult_istemi(
+    gorev: str,
+    mevcut_hareket: str,
+    kucultme_sayisi: int,
+    ton: str | None = None,
+) -> str:
     return (
         _KUCULT.replace("<<GOREV>>", gorev)
         .replace("<<MEVCUT>>", mevcut_hareket)
         .replace("<<SAYI>>", str(kucultme_sayisi))
+        .replace("<<TON>>", ton_metni(ton))
     )
 
 
-def ton_yeniden_yazim_istemi(kart: dict, sorunlar: list[str], yasakli: list[str]) -> str:
+def ton_yeniden_yazim_istemi(
+    kart: dict,
+    sorunlar: list[str],
+    yasakli: list[str],
+    ton: str | None = None,
+) -> str:
     return (
         _TON_YENIDEN_YAZIM.replace("<<YASAKLI>>", ", ".join(yasakli))
         .replace("<<SORUNLAR>>", ", ".join(sorunlar))
         .replace("<<HAREKET>>", str(kart.get("hareket", "")))
         .replace("<<BAGLAM>>", str(kart.get("baglam", "")))
         .replace("<<SURE>>", str(kart.get("sure_dk", 2)))
+        .replace("<<TON>>", ton_metni(ton))
     )
