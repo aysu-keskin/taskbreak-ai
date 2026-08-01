@@ -243,7 +243,16 @@ Aynı görev metninin farklı profillerde nasıl farklı sonuç verdiği (gerçe
 * `kısa ve net` → *"Donma hissi, zihnin aşırı yüklenmeye verdiği doğal bir tepkidir."* (9 kelime)
 * `sıcak ve eşlikçi` → *"…beynin donakalması çok doğaldır; şu an amacımız tamamlamak değil, seninle yan yana sadece ilk adımı atmak."* (22 kelime)
 
-![Tanışma Sohbeti](docs/sprint3/urun_tanisma.png)
+**Tanışma Sohbeti 1/3 — bıktıran alanlar.** Çoklu seçim + serbest metin. Her adımda "Şimdi değil" bağlantısı vardır; kullanıcı hiçbir soruyu cevaplamaya zorlanmaz:
+![Tanışma Sohbeti – bıktıran alanlar](docs/sprint3/urun_tanisma.png)
+
+**2/3 — ton tercihi.** Seçilen üslup her iki ajanın metinlerine yansır; yasaklı yargı dili sınırı hiçbir tercihte esnemez:
+![Tanışma Sohbeti – ton tercihi](docs/sprint3/urun_tanisma_ton.png)
+
+**3/3 — zorlanılan zaman dilimi.** Uygulama beyan edilen dilimde açılırsa hareket bir kademe daha küçük başlar:
+![Tanışma Sohbeti – zaman dilimi](docs/sprint3/urun_tanisma_zaman.png)
+
+**Kişiselleştirilmiş ilk hareket.** Profilinde "ev" bulunan bir kullanıcıda *"bulaşıkları yıkamam lazım ama kalkamıyorum"* görevi, **tek bir çatalı eline almaya** iner — hareket profil sinyaliyle küçültülmüştür:
 ![Kişiselleştirilmiş hareket kartı](docs/sprint3/urun_kisisellestirilmis_kart.png)
 
 🎬 **3 dakikalık tanıtım videosu:** […]
