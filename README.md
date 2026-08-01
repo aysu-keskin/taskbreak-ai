@@ -259,7 +259,7 @@ Aynı görev metninin farklı profillerde nasıl farklı sonuç verdiği (gerçe
 
 #### Kalite Doğrulaması
 
-* **Çıktı kalitesi regresyon testi:** 50 görevlik test seti (5 kategoride 10'ar tarif) İlk Hareket Üretici'den geçirildi; her çıktı hem çıktı sözleşmesine hem Ton Bekçisi'ne göre denetlendi. Sonuç: […] — rapor: [docs/sprint3/test_raporu.md](docs/sprint3/test_raporu.md)
+* **Çıktı kalitesi regresyon testi:** 50 görevlik test seti (5 kategoride 10'ar tarif) İlk Hareket Üretici'den geçirildi; her çıktı hem çıktı sözleşmesine hem Ton Bekçisi'ne göre denetlendi. **Sonuç: 50/50 çıktı sözleşmeye uydu**, başarısız görev yok — rapor: [docs/sprint3/test_raporu.md](docs/sprint3/test_raporu.md)
 * **Bilişsel yük denetimi:** Beş ekranın tamamı "ekran başına en fazla bir karar" ölçütüyle tek tek geçildi; sonuç, gerekçelendirilen tek istisnayla birlikte belgelendi: [docs/sprint3/bilissel_yuk_denetimi.md](docs/sprint3/bilissel_yuk_denetimi.md)
 
 #### Sprint Review
