@@ -6,6 +6,7 @@ REST API'sine doğrudan urllib (Python standart kütüphanesi) ile bağlanıyoru
 hiçbir dış paket gerekmez. Anahtar backend/.env dosyasından okunur (bkz. .env.example).
 """
 import json
+import os
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -27,7 +28,11 @@ def _env_oku() -> dict:
     return deger
 
 
-_AYAR = _env_oku()
+# Ayar kaynakları: önce işletim sistemi ortam değişkenleri, sonra backend/.env.
+# .env dosyası varsa KAZANIR — böylece geliştirme makinesinde sürpriz olmaz.
+# Sunucuda (Render/Vercel vb.) .env dosyası bulunmaz; anahtar panelden ortam
+# değişkeni olarak verilir ve bu birleştirme sayesinde okunur.
+_AYAR = {**os.environ, **_env_oku()}
 # gemini-flash-latest: her zaman güncel flash modeline işaret eden takma ad.
 # Sabit sürüm adları (ör. gemini-2.5-flash) zamanla yeni anahtarlara kapanıyor.
 MODEL = _AYAR.get("GEMINI_MODEL", "gemini-flash-latest")

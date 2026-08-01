@@ -18,6 +18,7 @@ yargısız bir yedek kart döner (fallbacks.py).
 """
 import json
 import logging
+import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import memory
@@ -28,8 +29,11 @@ from fallbacks import yedek_kart
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 log = logging.getLogger("taskbreak")
 
-HOST = "127.0.0.1"
-PORT = 8000
+# Yerel geliştirmede varsayılanlar kullanılır (baslat.bat hiç değişmedi).
+# Sunucuda barındırma platformu PORT'u kendisi atar ve dışarıdan erişim için
+# 0.0.0.0'a bağlanmak gerekir; ikisi de ortam değişkeniyle verilir.
+HOST = os.environ.get("HOST", "127.0.0.1")
+PORT = int(os.environ.get("PORT", "8000"))
 
 
 class Handler(BaseHTTPRequestHandler):
