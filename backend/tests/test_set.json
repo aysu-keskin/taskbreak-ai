@@ -1,15 +1,255 @@
 {
-  "_aciklama": "50 gerçek, dağınık görev tarifi hedefi (backlog #8 — sahibi: Buğra). Bu 10 tanesi başlangıç örneğidir; Buğra 50'ye tamamlayacak. Kategoriler dengeli olsun: ev, burokrasi, is_okul, sosyal, saglik. Her tarif GERÇEKÇİ ve dağınık olmalı — 'temizlik yap' değil, 'evi toplamam lazım ama nereden başlayacağımı bilmiyorum' gibi.",
+  "_aciklama": "50 gerçek, dağınık görev tarifinden oluşan regresyon test seti (backlog #8). Kategoriler dengelidir: ev, burokrasi, is_okul, sosyal, saglik — her birinden 10 tarif. Tarifler bilinçli olarak dağınıktır ('temizlik yap' değil, 'evi toplamam lazım ama nereden başlayacağımı bilmiyorum' gibi); amaç ajanı gerçek donma anı diliyle sınamaktır. Koşum: test_calistir.bat veya `cd backend && python -m tests.run_tests`.",
   "gorevler": [
-    { "id": 1, "kategori": "burokrasi", "metin": "vergi beyannamem var, üç gündür bakamıyorum bile" },
-    { "id": 2, "kategori": "ev", "metin": "evi toplamam lazım ama nereden başlayacağımı bilmiyorum, her yer felaket" },
-    { "id": 3, "kategori": "is_okul", "metin": "maile dönmem gerekiyordu, 2 hafta oldu, artık bakmaya utanıyorum" },
-    { "id": 4, "kategori": "is_okul", "metin": "bitirme projem duruyor öylece, dosyayı açamıyorum bile" },
-    { "id": 5, "kategori": "sosyal", "metin": "arkadaşımın mesajına cevap yazacaktım, günler geçti, şimdi ne desem bilmiyorum" },
-    { "id": 6, "kategori": "saglik", "metin": "diş randevusu almam lazım aylardır, telefonu elime alıp arayamıyorum" },
-    { "id": 7, "kategori": "ev", "metin": "çamaşırlar üç gündür makinede, katlanacak dağ gibi kıyafet var" },
-    { "id": 8, "kategori": "burokrasi", "metin": "ehliyet yenileme işlemi var, hangi belgeler lazım ona bile bakamadım" },
-    { "id": 9, "kategori": "is_okul", "metin": "yarın sunum var ve daha slaytları açmadım, düşününce midem bulanıyor" },
-    { "id": 10, "kategori": "ev", "metin": "taşınmadan kalan kutular iki aydır salonda duruyor, bakamıyorum" }
+    {
+      "id": 1,
+      "kategori": "burokrasi",
+      "metin": "vergi beyannamem var, üç gündür bakamıyorum bile"
+    },
+    {
+      "id": 2,
+      "kategori": "ev",
+      "metin": "evi toplamam lazım ama nereden başlayacağımı bilmiyorum, her yer felaket"
+    },
+    {
+      "id": 3,
+      "kategori": "is_okul",
+      "metin": "maile dönmem gerekiyordu, 2 hafta oldu, artık bakmaya utanıyorum"
+    },
+    {
+      "id": 4,
+      "kategori": "is_okul",
+      "metin": "bitirme projem duruyor öylece, dosyayı açamıyorum bile"
+    },
+    {
+      "id": 5,
+      "kategori": "sosyal",
+      "metin": "arkadaşımın mesajına cevap yazacaktım, günler geçti, şimdi ne desem bilmiyorum"
+    },
+    {
+      "id": 6,
+      "kategori": "saglik",
+      "metin": "diş randevusu almam lazım aylardır, telefonu elime alıp arayamıyorum"
+    },
+    {
+      "id": 7,
+      "kategori": "ev",
+      "metin": "çamaşırlar üç gündür makinede, katlanacak dağ gibi kıyafet var"
+    },
+    {
+      "id": 8,
+      "kategori": "burokrasi",
+      "metin": "ehliyet yenileme işlemi var, hangi belgeler lazım ona bile bakamadım"
+    },
+    {
+      "id": 9,
+      "kategori": "is_okul",
+      "metin": "yarın sunum var ve daha slaytları açmadım, düşününce midem bulanıyor"
+    },
+    {
+      "id": 10,
+      "kategori": "ev",
+      "metin": "taşınmadan kalan kutular iki aydır salonda duruyor, bakamıyorum"
+    },
+    {
+      "id": 11,
+      "kategori": "burokrasi",
+      "metin": "askerlik erteleme dilekçesi vermem gerekiyor, son tarih yaklaşıyor ama dosyaya bakamıyorum"
+    },
+    {
+      "id": 12,
+      "kategori": "burokrasi",
+      "metin": "elektrik faturası itirazı için forma girmem lazım, üç haftadır sekme açık duruyor"
+    },
+    {
+      "id": 13,
+      "kategori": "burokrasi",
+      "metin": "pasaport randevusu almam gerek, siteye giriyorum sonra kapatıyorum"
+    },
+    {
+      "id": 14,
+      "kategori": "burokrasi",
+      "metin": "kira kontratını yenilemem lazım, ev sahibi bekliyor, telefonu açamıyorum"
+    },
+    {
+      "id": 15,
+      "kategori": "burokrasi",
+      "metin": "vergi levhasını güncellemem gerekiyordu, muhasebeci iki kere yazdı hâlâ dönmedim"
+    },
+    {
+      "id": 16,
+      "kategori": "burokrasi",
+      "metin": "sigorta poliçem bitmiş, yenilemek için aramam lazım ama numaraya bakmak bile ağır geliyor"
+    },
+    {
+      "id": 17,
+      "kategori": "burokrasi",
+      "metin": "bankadaki yanlış işlem için itiraz açmam gerek, önce dekontları bulmam lazım"
+    },
+    {
+      "id": 18,
+      "kategori": "burokrasi",
+      "metin": "adres değişikliğini e-devletten bildirmem lazım, iki aydır listemde duruyor"
+    },
+    {
+      "id": 19,
+      "kategori": "ev",
+      "metin": "bulaşıklar iki gündür lavaboda, mutfağa girmemek için başka odada oturuyorum"
+    },
+    {
+      "id": 20,
+      "kategori": "ev",
+      "metin": "çamaşırlar makinede kaldı, kokmaya başladı, elimi sürmek istemiyorum"
+    },
+    {
+      "id": 21,
+      "kategori": "ev",
+      "metin": "yatak odasındaki kıyafet yığınını kaldırmam lazım ama nereden tutacağımı bilmiyorum"
+    },
+    {
+      "id": 22,
+      "kategori": "ev",
+      "metin": "buzdolabında bozulmuş bir şeyler var, kokusu geliyor, kapağı açmaya cesaret edemiyorum"
+    },
+    {
+      "id": 23,
+      "kategori": "ev",
+      "metin": "kargo kutuları haftalardır kapının önünde duruyor, sadece katlayıp atmam gerek"
+    },
+    {
+      "id": 24,
+      "kategori": "ev",
+      "metin": "banyoyu temizlemem gerek, o kadar birikti ki bakınca içim daralıyor"
+    },
+    {
+      "id": 25,
+      "kategori": "ev",
+      "metin": "ampul patladı, yenisini takmak iki dakika sürer ama iki haftadır karanlıkta oturuyorum"
+    },
+    {
+      "id": 26,
+      "kategori": "is_okul",
+      "metin": "rapor teslimine iki gün kaldı, dosyayı açtım kapattım, tek satır yazamadım"
+    },
+    {
+      "id": 27,
+      "kategori": "is_okul",
+      "metin": "danışman görüşmesi için hocaya mail atmam lazım, cümleyi bir türlü kuramıyorum"
+    },
+    {
+      "id": 28,
+      "kategori": "is_okul",
+      "metin": "sunum slaytlarını hazırlamam gerek, konu belli ama başlığı bile yazamadım"
+    },
+    {
+      "id": 29,
+      "kategori": "is_okul",
+      "metin": "cv'mi güncellemem lazım, başvuru ilanı yarın kapanıyor"
+    },
+    {
+      "id": 30,
+      "kategori": "is_okul",
+      "metin": "iş yerinden gelen değerlendirme formunu doldurmam gerekiyor, açmaya bile üşeniyorum"
+    },
+    {
+      "id": 31,
+      "kategori": "is_okul",
+      "metin": "final projesi için kaynak taraması yapmalıyım, kütüphane sekmesi açık ama bakmıyorum"
+    },
+    {
+      "id": 32,
+      "kategori": "is_okul",
+      "metin": "toplantı notlarını ekiple paylaşmam gerekiyordu, üç gün oldu kimse sormadı ama ben biliyorum"
+    },
+    {
+      "id": 33,
+      "kategori": "sosyal",
+      "metin": "annemi aramam lazım, iki haftadır arayamadım, şimdi aramak daha da zor geliyor"
+    },
+    {
+      "id": 34,
+      "kategori": "sosyal",
+      "metin": "arkadaşımın doğum günü mesajını kaçırdım, şimdi ne yazacağımı bilemiyorum"
+    },
+    {
+      "id": 35,
+      "kategori": "sosyal",
+      "metin": "düğün davetine cevap vermem gerekiyordu, sanırım son tarih de geçti"
+    },
+    {
+      "id": 36,
+      "kategori": "sosyal",
+      "metin": "borcumu ödeyeceğimi söylediğim arkadaşıma dönmem lazım, konuşmayı açamıyorum"
+    },
+    {
+      "id": 37,
+      "kategori": "sosyal",
+      "metin": "taziye mesajı atmam gerek ama doğru cümleyi bulamayınca hiç yazmadım"
+    },
+    {
+      "id": 38,
+      "kategori": "sosyal",
+      "metin": "grup sohbetinde bana soru sorulmuş, cevap vermeyeli üç gün oldu"
+    },
+    {
+      "id": 39,
+      "kategori": "sosyal",
+      "metin": "komşuyla konuşup gürültü meselesini halletmem lazım, kapıya gitmek çok zor geliyor"
+    },
+    {
+      "id": 40,
+      "kategori": "sosyal",
+      "metin": "eski bir arkadaşım buluşalım dedi, cevap yazmadım, şimdi geç oldu diye hiç yazmıyorum"
+    },
+    {
+      "id": 41,
+      "kategori": "sosyal",
+      "metin": "teşekkür etmem gereken biri var, üstünden zaman geçtikçe daha da imkânsızlaşıyor"
+    },
+    {
+      "id": 42,
+      "kategori": "saglik",
+      "metin": "diş randevusu almam lazım, ağrı var ama telefonu elime alamıyorum"
+    },
+    {
+      "id": 43,
+      "kategori": "saglik",
+      "metin": "tahlil sonuçlarını almam gerekiyor, sonucu görmekten korktuğum için gitmiyorum"
+    },
+    {
+      "id": 44,
+      "kategori": "saglik",
+      "metin": "ilaçlarım bitti, eczaneye uğramam lazım, üç gündür yanından geçip gidiyorum"
+    },
+    {
+      "id": 45,
+      "kategori": "saglik",
+      "metin": "kontrol randevumu kaçırdım, yenisini almak için aramam gerek"
+    },
+    {
+      "id": 46,
+      "kategori": "saglik",
+      "metin": "spora yazıldım bir kere bile gitmedim, çantayı hazırlamak bile gözümde büyüyor"
+    },
+    {
+      "id": 47,
+      "kategori": "saglik",
+      "metin": "psikoloğumla görüşme ayarlamam lazım, mesaj yazmaya başlıyorum sonra siliyorum"
+    },
+    {
+      "id": 48,
+      "kategori": "saglik",
+      "metin": "gözlük numaram değişti, muayene olmam lazım, ekrana bakmak zorlaşıyor"
+    },
+    {
+      "id": 49,
+      "kategori": "saglik",
+      "metin": "uyku düzenim tamamen bozuldu, doktora gitmem gerek ama randevu almak da enerji istiyor"
+    },
+    {
+      "id": 50,
+      "kategori": "saglik",
+      "metin": "reçetemi yenilettirmem lazım, aile hekimine gitmek için ayakkabı giymek bile fazla geliyor"
+    }
   ]
 }
