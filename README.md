@@ -29,6 +29,64 @@ TaskBreak AI bir tedavi veya klinik araç değildir; günlük görev başlatmay�
 
 ---
 
+### 🏗️ Mimari ve Teknik Kararlar
+
+#### Katmanlar
+
+| Katman | Teknoloji | Sorumluluk |
+|---|---|---|
+| Arayüz | React (Vite) | 5 ekran; backend'e **yalnızca** `src/api.js` üzerinden çıkar |
+| API | Python standart kütüphanesi (`http.server`) | Uçlar, hata yakalama, veri yükleme |
+| Ajanlar | Gemini REST (`urllib`) | İlk Hareket Üretici + Ton Bekçisi |
+| Kural | `models.py`, `personalization.py` | Çıktı sözleşmesi doğrulaması, kişiselleştirme kademesi |
+| Veri | JSON dosyaları | Oturum geçmişi ve kullanıcı profili |
+
+Backend **hiçbir dış paket gerektirmez**; `requirements.txt` boştur.
+
+#### Bir isteğin izlediği yol
+
+```
+Kullanıcı → api.js → main.py ─┬─ user_profile.profil_getir()
+                              └─ memory.oturumlari_getir()
+                                     ↓
+              personalization.baslangic_kademesi()   ← kişiselleştirme kademesi (0–3)
+                                     ↓
+              first_move.ilk_hareket()
+                     ├─ Gemini çağrısı (client.py)
+                     ├─ models.sozlesme_ihlalleri()  ← uymazsa 3 kez yeniden üret
+                     └─ tone_guard.kart_denetle()    ← yargı dili varsa yeniden yazdır
+                                     ↓
+                          kart  ·  hata olursa fallbacks.yedek_kart()
+```
+
+**İki ajanlı orkestrasyon** buradadır: üretici ajanın çıktısı, denetleyici ajandan geçmeden kullanıcıya ulaşamaz. Kirli metin ekrana **teknik olarak** giremez; bu iyi niyete bırakılmamıştır.
+
+**Sorumluluk ayrımı bilinçlidir:** `personalization.py` saf bir modüldür (dosya okumaz, ağa çıkmaz — girdileri parametre alır), veri yükleme `main.py`'nin işidir, ajan dosyaları yalnızca "üret → doğrula → denetle" akışını taşır. Bu sayede kişiselleştirme mantığı gerçek API çağrısı yapmadan test edilebilir.
+
+#### Veri katmanı: neden veritabanı değil
+
+Hafıza iki JSON dosyasında tutulur: `backend/data/sessions.json` (başlatma geçmişi) ve `backend/data/profile.json` (kullanıcı profili). Klasör `.gitignore`'dadır — kullanıcı verisi repoya gönderilmez.
+
+Bu bilinçli bir karardır. Backlog'da hafıza kalemi baştan "JSON/SQLite" olarak esnek tanımlanmıştı. Ürün tek kullanıcılıdır ve az veri üretir; SQLite'ın çözdüğü problemler (eşzamanlılık, sorgulama, ölçek) bu kapsamda mevcut değildir. Önemli olan hafızanın **kullanılıyor** olmasıdır: geçmiş oturumlardaki küçültme davranışı, yeni bir görevde verilecek ilk hareketin boyutunu doğrudan belirler.
+
+**Ne zaman SQLite'a geçilmeli:** çok kullanıcılı kullanıma geçildiğinde, oturum sayısı dosya okumayı yavaşlatacak boyuta ulaştığında ya da tarih/kategori bazlı sorgulama gerektiğinde. Canlıya alma senaryosundaki kalıcılık sınırı [DEPLOY.md](DEPLOY.md) §4'te belgelenmiştir.
+
+#### Teknik kararlar ve gerekçeleri
+
+| Karar | Gerekçe |
+|---|---|
+| Streamlit → **React + ayrık backend** *(Sprint 2)* | Katmanların ayrılması paralel çalışmayı mümkün kıldı |
+| FastAPI/uvicorn → **stdlib `http.server`** *(Sprint 2)* | Geliştirme makinesindeki Python 3.13.13 native çökme veriyordu; API sözleşmesi değişmedi, `pip install` bağımlılığı sıfıra indi |
+| SDK yerine **Gemini REST** | Aynı native uyumsuzluk; `urllib` ile dış paketsiz çözüldü |
+| Sabit yapılandırma → **ortam değişkenleri** *(Sprint 3)* | Anahtar yalnızca `.env` dosyasından okunuyordu; hiçbir sunucuda çalışamazdı |
+| `gemini-flash-latest` → **`gemini-flash-lite-latest`** *(Sprint 3)* | Ücretsiz katmanda günlük 20 istek sınırı ölçüldü; bu limit regresyon testini ve normal kullanımı imkânsız kılıyordu |
+
+#### Hata dayanıklılığı
+
+Kullanıcı **asla** teknik hata veya yargılayıcı dil görmez. API erişilemezse, kota dolarsa veya yanıt bozuksa `fallbacks.py` yargısız bir yedek kart döndürür. Çıktı sözleşmesinden geçemeyen hareket üç kez yeniden üretilir; Ton Bekçisi'nden geçemeyen metin yeniden yazdırılır, olmazsa kart hiç gösterilmez.
+
+---
+
 ### 📈 Sprint Günlükleri ve Kanıtlar
 
 <details open>

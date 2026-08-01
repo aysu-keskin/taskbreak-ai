@@ -33,9 +33,15 @@ def _env_oku() -> dict:
 # Sunucuda (Render/Vercel vb.) .env dosyası bulunmaz; anahtar panelden ortam
 # değişkeni olarak verilir ve bu birleştirme sayesinde okunur.
 _AYAR = {**os.environ, **_env_oku()}
-# gemini-flash-latest: her zaman güncel flash modeline işaret eden takma ad.
-# Sabit sürüm adları (ör. gemini-2.5-flash) zamanla yeni anahtarlara kapanıyor.
-MODEL = _AYAR.get("GEMINI_MODEL", "gemini-flash-latest")
+# Takma ad (…-latest) kullanılır: sabit sürüm adları (ör. gemini-2.5-flash)
+# zamanla yeni anahtarlara kapanıyor.
+#
+# Neden "lite": gemini-flash-latest ücretsiz katmanda GÜNDE 20 istekle sınırlı
+# (GenerateRequestsPerDayPerProjectPerModel-FreeTier = 20). Bu limit hem 50
+# görevlik regresyon testini hem normal kullanımı imkânsız kılıyordu; ölçüldü
+# ve doğrulandı. Lite takma adında bu duvar yok, çıktı kalitesinde gözlenen
+# fark olmadı. Ayrıntı ve karşılaştırma: backend/.env.example
+MODEL = _AYAR.get("GEMINI_MODEL", "gemini-flash-lite-latest")
 
 
 def _json_ayikla(metin: str) -> str:
