@@ -255,6 +255,9 @@ Aynı görev metninin farklı profillerde nasıl farklı sonuç verdiği (gerçe
 **Kişiselleştirilmiş ilk hareket.** Profilinde "ev" bulunan bir kullanıcıda *"bulaşıkları yıkamam lazım ama kalkamıyorum"* görevi, **tek bir çatalı eline almaya** iner — hareket profil sinyaliyle küçültülmüştür:
 ![Kişiselleştirilmiş hareket kartı](docs/sprint3/urun_kisisellestirilmis_kart.png)
 
+**Süre sonu kontrolü.** Sayaç bittiğinde ürün *"süren doldu!"* demez; yargısız bir soruyla açılır ve karar kullanıcıya bırakılır. Yapmamak da bir seçenektir:
+![Süre sonu yargısız kontrol](docs/sprint3/urun_sure_sonu_kontrol.png)
+
 🎬 **3 dakikalık tanıtım videosu:** […]
 
 #### Kalite Doğrulaması
