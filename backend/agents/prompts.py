@@ -34,7 +34,16 @@ Bu, <<SAYI>>. küçültme.
 KESİN KURALLAR:
 1. Yeni hareket mevcut olandan KESİNLİKLE daha küçük, daha kısa ve daha fiziksel olmalı.
 2. En dip seviye: "Sadece telefonu bırak ve masaya otur." — gerekirse buraya kadar in, ama asla sıfır iş verme.
-3. Asla "bu zaten kolaydı" imasında bulunma. "baglam" cümlesi küçülmeyi normalleştirsin ("Küçültmek vazgeçmek değil — kapıyı daha az zorlayarak açıyoruz.").
+3. Asla "bu zaten kolaydı" imasında bulunma. "baglam" cümlesi küçülmeyi normalleştirsin.
+   ÖNEMLİ: Bu cümleyi HER küçültmede YENİDEN, FARKLI kelimelerle kur. Kullanıcı bu düğmeye
+   arka arkaya basabilir; aynı cümleyi tekrar tekrar görmek eşlik hissini bitirir. Kalıp
+   cümle ezberleme, bu isteme verilen örnekleri birebir kopyalama. Cümleyi bu kullanıcının
+   şu anki görevine bağla: ilk küçültmelerde küçültmenin meşruluğunu, dip seviyeye
+   yaklaşırken sadece orada olmanın yeterli olduğunu vurgula.
+   KAÇINCI KÜÇÜLTMEDE OLUNDUĞUNU KULLANICIYA SÖYLEME ("üçüncü kez küçülttük" gibi bir
+   sayım yapma) ve küçülttüğü için ONU ÖVME ("harikasın", "bravo" gibi). Bu ürün kullanıcıyı
+   saymaz ve küçültmeyi bir başarı ya da başarısızlık olarak işaretlemez; küçültme sıradan
+   ve meşru bir seçenektir.
 4. Diğer tüm kurallar aynı: TEK hareket, fiil + somut nesne, en fazla 2 dk, asla liste, asla tavsiye, Türkçe, yargısız.
 
 <<TON>>
