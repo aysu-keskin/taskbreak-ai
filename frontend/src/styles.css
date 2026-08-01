@@ -160,6 +160,13 @@ form .birincil {
   margin-bottom: 24px;
 }
 
+/* Süre dolunca gelen yargısız kontrol. "Yaptım" birincil kalır; uzat/küçült
+   ikincil olarak altında durur — karar ağırlığı tek yerde toplansın diye. */
+.kontrol p {
+  color: var(--yumusak);
+  margin: 0 0 4px;
+}
+
 /* Kapanış */
 .kutlama {
   font-size: 1.5rem;

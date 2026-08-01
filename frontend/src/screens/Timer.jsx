@@ -21,6 +21,14 @@ export default function Timer({ kart, onTamam, onKucult }) {
   const dakika = String(Math.floor(kalan / 60)).padStart(2, "0");
   const saniye = String(kalan % 60).padStart(2, "0");
 
+  // "Biraz daha uzat": 60 saniye EKLER (süreyi sıfırdan başlatmaz — etiketle
+  // davranış uyuşsun diye) ve ekranı geri sayıma döndürür. `doldu` sıfırlanmazsa
+  // sayaç yeniden işlerken "süre doldu" kontrolü ekranda takılı kalıyordu.
+  function uzat() {
+    setKalan((s) => s + 60);
+    setDoldu(false);
+  }
+
   return (
     <section className="ekran sayac">
       <div className="nefes-halka">
@@ -41,7 +49,7 @@ export default function Timer({ kart, onTamam, onKucult }) {
             <button className="birincil" onClick={onTamam}>
               Yaptım
             </button>
-            <button className="ikincil" onClick={() => setKalan(toplamSaniye)}>
+            <button className="ikincil" onClick={uzat}>
               Biraz daha uzat
             </button>
             <button className="ikincil" onClick={onKucult}>
