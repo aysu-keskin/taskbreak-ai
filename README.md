@@ -143,6 +143,11 @@ Sprint 2'nin hedefi **Çalışan MVP** olarak belirlendi: iki AI ajanı (İlk Ha
 #### Daily Scrum
 Sprint 2 daily scrum notları (gerçek seyriyle): 📄 [docs/sprint2/daily_scrum.md](docs/sprint2/daily_scrum.md)
 
+#### Sprint Board
+Sprint board, backlog dosyası üzerindeki durum kolonlarıyla takip edilmiştir (✅ tamamlandı · 🟡 kısmen · 🔜 planlandı): [docs/ProductBacklog.md](docs/ProductBacklog.md)
+
+![Sprint 2 Board](docs/sprint2/sprint_board.png)
+
 #### Ürün Durumu
 Donma anı akışı uçtan uca çalışır durumdadır: görev girişi → tek mikro hareket kartı ("Başlıyorum" / "Bu bile fazla") → body doubling'li geri sayım → yargısız kapanış. Backend gerçek Gemini API'siyle tek hareket üretir, Ton Bekçisi yargı dilini engeller, oturumlar hafızaya kaydedilir.
 
