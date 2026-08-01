@@ -1,5 +1,7 @@
 @echo off
 title TaskBreak AI - Cikti Kalitesi Testi
+rem Konsolu UTF-8'e al: rapordaki isaretler ve Turkce karakterler bozulmasin.
+chcp 65001 >nul
 cd /d "%~dp0backend"
 
 if not exist ".env" (
