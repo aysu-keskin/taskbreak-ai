@@ -122,6 +122,87 @@ Backend başta FastAPI + uvicorn planlandı; ancak geliştirme makinesindeki Pyt
 <details>
 <summary><h4>🏃‍♂️ Sprint 3 (20 Temmuz – 2 Ağustos 2026)</h4></summary>
 
-*Sprint 3 sonunda doldurulacaktır.*
+#### Sprint Notları
+
+Sprint 3'ün hedefi **Kişiselleştirme ve Teslim** olarak belirlendi: ürünün, kullanıcının kendi beyan ettiği profile göre hem hareketin boyutunu hem konuşma tonunu uyarlaması ve bootcamp teslim çıktılarının tamamlanması. Sprint içinde kalan süreye göre yeniden sıralanmış yürütme planı hazırlandı: [docs/sprint3/Revize_Plan.md](docs/sprint3/Revize_Plan.md)
+
+Sprint boyunca **iki kapsam kararı** alındı ve gerekçeleriyle belgelendi:
+
+* **#5 — Canlıya alma → canlıya alınabilirlik hazırlığı (13 → 5 puan).** Kılavuz canlı linki opsiyonel tutmakta (s.24), ekstra puan kriteri ise *"canlıya alınmış **veya** canlıya alınabilecek şekilde geliştirilme yapılmış"* şeklinde tanımlanmaktadır (s.25). Kalan sürede ilk kez deploy denemek yerine, proje deploy edilebilir hale getirilip talimatı belgelendi: [DEPLOY.md](DEPLOY.md). Bu hazırlık sırasında gerçek bir engel bulundu ve giderildi (aşağıda).
+* **#10 — Fiyatlandırma sayfası (mock) kapsam dışı (3 puan).** Ürün bir donma anı aracıdır; arayüzde fiyat/satış öğesi bulunması "ekran başına en fazla bir karar" ilkesiyle çelişir. İş modeli belgesiz kalmamaktadır — freemium yapısı, premium fiyatlandırma ve B2B/EAP kanalı [docs/UrunStratejisi.md](docs/UrunStratejisi.md) §4'te ayrıntısıyla yazılıdır.
+
+Ayrıca Sprint 2'den devreden borçlar bu sprintte kapatıldı: test seti 50 göreve tamamlandı ve Sprint 2 sprint board görseli eklendi.
+
+#### Tamamlanan Puan ve Mantığı
+
+* **Sprint 3 planlanan:** 100 puan → **kapsam revizyonu sonrası hedef: 89 puan** · **Tamamlanan: […]**
+* Backlog'daki #1, #2 ve #3 ayrı işler olarak planlanmış olsa da **aynı veri hattını (kullanıcı profili) paylaştıkları için tek gövde halinde geliştirildi**; bu, 42 puanlık işin tek ve tutarlı bir mimari üzerinden çıkmasını sağladı.
+
+| # | İş | Puan | Durum |
+|---|----|------|-------|
+| 1 | Akıllı Hafıza ile kişiselleştirme | 21 | ✅ Tamamlandı |
+| 2 | Tanışma Sohbeti (3 soruluk onboarding + profil kaydı) | 13 | ✅ Tamamlandı |
+| 3 | Ton profili — Ton Bekçisi'nin uyarlanması | 8 | ✅ Tamamlandı |
+| 4 | Deneyim iyileştirmeleri ve bilişsel yük denetimi | 8 | ✅ Tamamlandı |
+| 5 | Canlıya alınabilirlik hazırlığı *(revize)* | 5 | ✅ Tamamlandı |
+| 6 | Uçtan uca test ve hata düzeltmeleri | 8 | […] |
+| 7 | 3 dakikalık tanıtım videosu | 13 | […] |
+| 8 | Final dokümantasyon | 8 | […] |
+| 9 | Ürün Teslim Formu ve son kontroller | 5 | […] |
+| — | *Sprint 2 borcu:* test seti 10 → 50 + koşum raporu | (8) | ✅ Tamamlandı |
+
+#### Daily Scrum
+
+Sprint 3 daily scrum notları: 📄 [docs/sprint3/daily_scrum.md](docs/sprint3/daily_scrum.md)
+
+#### Sprint Board
+
+Sprint board, backlog dosyası üzerindeki durum kolonlarıyla takip edilmiştir: [docs/ProductBacklog.md](docs/ProductBacklog.md)
+
+![Sprint 3 Board](docs/sprint3/sprint_board.png)
+
+#### Ürün Durumu
+
+Sprint 3 sonunda ürün, donma anı akışına ek olarak **kullanıcıyı tanıyan** bir yapıya kavuştu. Akışın dışında yürütülen kısa bir Tanışma Sohbeti ile kullanıcı, kendisini bıktıran alanları, kendisiyle nasıl konuşulmasını istediğini ve gün içinde en çok ne zaman zorlandığını beyan eder. Bu profil **her iki ajanı da** besler.
+
+**Kişiselleştirme nasıl çalışıyor:** İlk hareketin başlangıç boyutunu üç sinyal birlikte belirler — beyan edilen zorlayıcı alanlar, geçmiş oturumlardaki küçültme davranışı ve uygulamanın beyan edilen "zor saatte" açılmış olması. Her sinyal hareketi bir kademe küçültür.
+
+Aynı görev metninin farklı profillerde nasıl farklı sonuç verdiği (gerçek çıktılar):
+
+| Profil | Üretilen ilk hareket |
+|---|---|
+| Profil yok | *"Bilgisayarında vergi beyannamesi belgesini aç ve ekranı öylece bırak."* |
+| Bürokrasi + zor saat | *"Bilgisayarındaki vergi klasörüne tek bir kez tıkla ve orada dur."* |
+| Üç sinyal birden | *"Bilgisayarının kapağına elini koy."* |
+
+**Ton profili** yalnızca üslubu değiştirir; yasaklı yargı dili listesi hiçbir tercihte esnemez. Aynı görev, iki farklı tonda:
+
+* `kısa ve net` → *"Donma hissi, zihnin aşırı yüklenmeye verdiği doğal bir tepkidir."* (9 kelime)
+* `sıcak ve eşlikçi` → *"…beynin donakalması çok doğaldır; şu an amacımız tamamlamak değil, seninle yan yana sadece ilk adımı atmak."* (22 kelime)
+
+![Tanışma Sohbeti](docs/sprint3/urun_tanisma.png)
+![Kişiselleştirilmiş hareket kartı](docs/sprint3/urun_kisisellestirilmis_kart.png)
+
+🎬 **3 dakikalık tanıtım videosu:** […]
+
+#### Kalite Doğrulaması
+
+* **Çıktı kalitesi regresyon testi:** 50 görevlik test seti (5 kategoride 10'ar tarif) İlk Hareket Üretici'den geçirildi; her çıktı hem çıktı sözleşmesine hem Ton Bekçisi'ne göre denetlendi. Sonuç: […] — rapor: [docs/sprint3/test_raporu.md](docs/sprint3/test_raporu.md)
+* **Bilişsel yük denetimi:** Beş ekranın tamamı "ekran başına en fazla bir karar" ölçütüyle tek tek geçildi; sonuç, gerekçelendirilen tek istisnayla birlikte belgelendi: [docs/sprint3/bilissel_yuk_denetimi.md](docs/sprint3/bilissel_yuk_denetimi.md)
+
+#### Sprint Review
+
+* Sprint hedefinin ürün tarafı tamamlandı: kişiselleştirme gövdesi, Tanışma Sohbeti ve ton profili devreye alındı. İki ajanlı orkestrasyon artık kullanıcı profiliyle besleniyor.
+* Kişiselleştirme **süs veri üretmiyor:** Tanışma Sohbeti'nde sorulan üç sorunun üçünün de kodda karşılığı vardır (hareketin boyutu, Ton Bekçisi'nin üslubu, saate bağlı ek küçültme). Karşılığı olmayan bilgi kullanıcıdan istenmemiştir.
+* Canlıya alma bilinçli olarak kapsam dışında bırakıldı; ürün deploy edilebilir halde bırakıldı ve talimatı, bilinen sınırlarıyla birlikte belgelendi.
+* **Denetimler iki gerçek hata ortaya çıkardı ve ikisi de giderildi:** (1) sayaç ekranında süre uzatıldığında "süre doldu" kontrolü ekranda takılı kalıyordu; (2) test koşucusu Windows konsolunun Türkçe kod sayfasında `UnicodeEncodeError` ile çöküyordu — bu, test setinin daha önce koşulamamış olmasını da açıklamaktadır.
+* Sprint 2'den devreden borçlar kapatıldı: test seti 50 göreve tamamlandı, Sprint 2 sprint board görseli eklendi.
+* […Ekip katılımı ve kalan işlerle ilgili değerlendirme…]
+
+#### Sprint Retrospective
+
+* **İyi gidenler:** Backlog'da ayrı görünen üç işin aynı veri hattını paylaştığı fark edildi ve tek gövde halinde geliştirilerek zaman kazanıldı. Kapsam kararları erken alınıp gerekçeleriyle belgelendi; bu, teslim baskısı altında ne feda edileceğinin tartışılmasını önledi.
+* **Zorluklar:** […]
+* **Bootcamp sonrası yol haritası:** Canlıya alma (Render + Vercel — hazırlığı tamamlandı), hafızanın kalıcı bir veri katmanına taşınması, çok kullanıcılı kullanım için oturum katmanı, test setinin gerçek kullanıcı verisiyle genişletilmesi.
 
 </details>
