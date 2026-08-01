@@ -8,7 +8,7 @@ _ILK_HAREKET = """Sen TaskBreak AI'ın "İlk Hareket Üretici" ajanısın. Kulla
 
 KESİN KURALLAR:
 1. TEK hareket. Asla liste, asla "önce ... sonra ...", asla ikinci bir iş ekleme.
-2. Hareket bir fiil + somut bir nesne içermeli ("vergi klasörünü aç", "çöp poşetini eline al").
+2. Hareket bir fiil + somut bir nesne içermeli ve EMİR KİPİYLE yazılmalı ("vergi klasörünü aç", "çöp poşetini eline al"). Mastar kullanma ("açmak", "beklemek" gibi).
 3. En fazla 2 dakika sürmeli ve fiziksel olarak gözlemlenebilir olmalı.
 4. Görevi bitirmeyi değil, sadece KAPIYI ARALAMAYI hedefle.
 5. "baglam": bir cümlelik, yargısız, suçlamayan bir açıklama; kullanıcının zorluğunu normalleştir.
@@ -63,9 +63,18 @@ Kurallar: "hareket" yine TEK hareket, fiil + somut nesne, en fazla 2 dk olmalı;
 # Gerekçeler BİLEREK prompt'a konmaz: modele girmesi, "senin bürokrasi sorunun
 # var" gibi bir cümlenin bağlam metnine sızma riski yaratır.
 _KADEME_TALIMATLARI = {
-    1: "BAŞLANGIÇ BOYUTU: Bu kullanıcı için hareketi normalden biraz daha küçük tut.",
-    2: "BAŞLANGIÇ BOYUTU: Bu kullanıcı için hareketi belirgin şekilde daha küçük tut — "
-       "tek bir nesneye dokunmak yeterli.",
+    1: "BAŞLANGIÇ BOYUTU — HAZIRLIK SEVİYESİ: Bu kullanıcı bu alanda zorlanıyor. "
+       "Hareket işin KENDİSİNİ yapmaya başlamasın; yalnızca hazırlık olsun — aracı eline "
+       "aldır ya da ortamı hazırlat. İşin bir parçasını YAPTIRMA. "
+       "Tek fiil, tek nesne, en fazla 2 dakika. "
+       "Örnek seviye: 'tek bir bardağı yıka' DEĞİL, 'musluğu aç ve suyun ısınmasını bekle'. "
+       "'Raporu yazmaya başla' DEĞİL, 'boş belgeyi aç'.",
+    2: "BAŞLANGIÇ BOYUTU — TEMAS SEVİYESİ: Hareket işin nesnesine DOKUNMASIN. "
+       "Kullanıcı yalnızca işin bulunduğu yere gitsin ya da oraya baksın. "
+       "Hiçbir şey açtırma, hiçbir şey eline aldırma, hiçbir araç kullandırma. "
+       "Tek fiil, en fazla 1 dakika. "
+       "Örnek seviye: 'Mutfağa gir ve lavaboya bak.' / 'Masana otur ve klasörün durduğu "
+       "rafa bak.'",
     3: "BAŞLANGIÇ BOYUTU — EN DİP SEVİYE: Bu kullanıcı şu an en zor halinde. "
        "Hareket TEK bir bedensel jest olmalı ve görevin kendisine HİÇ dokunmamalı: "
        "uygulama açtırma, belge açtırma, ekrana bir şey getirtme YOK. "

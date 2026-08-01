@@ -2,6 +2,8 @@
 
 > **Koşum tarihi:** 1 Ağustos 2026 · **Model:** `gemini-flash-lite-latest`
 > **Koşucu:** `backend/tests/run_tests.py` · **Test seti:** `backend/tests/test_set.json`
+>
+> Bu rapor, kişiselleştirme kademesi talimatlarının güçlendirilmesinden **sonraki** koşuma aittir. Prompt değiştiği için test yeniden koşulmuştur; testin varlık sebebi budur.
 
 ---
 
@@ -61,6 +63,42 @@ Erteleme gerekçeleri de çeşitlendirilmiştir: korku, utanç, fiziksel eşik, 
 | Sağlık | "Telefonu eline al ve sadece arama ekranını aç." |
 
 Tümü tek hareket, fiil + somut nesne ve ≤ 2 dakika ölçütlerini karşılamaktadır.
+
+---
+
+## Bilinen sınır: bir çıktıda emir kipi kayması
+
+50 çıktının 1'i (#4) emir kipi yerine mastar hâlinde geldi: *"Bilgisayarını açıp proje dosyasını ekrana **getirmek**"*. Anlam ve boyut doğrudur; yalnızca dilbilgisi kipi kaymıştır.
+
+Bu, çıktı sözleşmesinin bir ihlali **değildir** — sözleşme tek hareket, süre, fiil + nesne ve yargısız bağlam koşullarını denetler; kip denetimi içermez. Prompt'a "mastar kullanma" kuralı eklenmiş olmasına rağmen model %2 oranında bu kurala uymamıştır. Kip denetiminin sözleşmeye eklenmesi, ileriye dönük bir iyileştirme olarak kayıtlıdır.
+
+---
+
+## Kişiselleştirme kademesinin ölçümü
+
+Test setinden bağımsız olarak, kişiselleştirme kademesinin çıktıyı gerçekten değiştirip değiştirmediği ölçülmüştür. Aynı görev metni, dört kademede ayrı ayrı çalıştırılmıştır:
+
+**Görev:** *"vergi beyannamemi yazmam lazım ama üç gündür bakamıyorum"*
+
+| Kademe | Üretilen ilk hareket |
+|---|---|
+| 0 | "Vergi klasörüne çift tıkla ve aç." |
+| 1 | "Bilgisayarın güç tuşuna bas, masaüstünün açılmasını bekle." |
+| 2 | "Bilgisayarının bulunduğu masaya yürü ve ekranına bak." |
+| 3 | "Sadece bilgisayarın bulunduğu masaya doğru bir adım at." |
+
+**Görev:** *"bulaşıkları yıkamam lazım ama kalkamıyorum"*
+
+| Kademe | Üretilen ilk hareket |
+|---|---|
+| 0 | "Tezgaha yürü ve sadece süngeri eline al." |
+| 1 | "Mutfağa yürü ve bulaşık süngerini eline al." |
+| 2 | "Mutfağa git ve tezgaha bak." |
+| 3 | "Sadece mutfak tezgahına doğru bir adım at." |
+
+**Bulgu:** Kademe arttıkça hareket görevden uzaklaşmaktadır. Etkinin büyüklüğü göreve bağlıdır: taban hareketin küçülecek alanı olan görevlerde (bürokrasi, iş/okul) fark kademe 1'den itibaren belirginken, taban çıktısı zaten asgari olan basit fiziksel görevlerde (bulaşık) fark kademe 2'den sonra ortaya çıkmaktadır.
+
+Bu ölçüm bir kez yapılmış olup ilk denemede kademe 0–2 arasında belirgin fark üretmemişti; kademe talimatları bu bulgu üzerine güçlendirilmiş ve ölçüm tekrarlanmıştır.
 
 ---
 

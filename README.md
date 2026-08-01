@@ -230,13 +230,18 @@ Sprint 3 sonunda ürün, donma anı akışına ek olarak **kullanıcıyı tanıy
 
 **Kişiselleştirme nasıl çalışıyor:** İlk hareketin başlangıç boyutunu üç sinyal birlikte belirler — beyan edilen zorlayıcı alanlar, geçmiş oturumlardaki küçültme davranışı ve uygulamanın beyan edilen "zor saatte" açılmış olması. Her sinyal hareketi bir kademe küçültür.
 
-Aynı görev metninin farklı profillerde nasıl farklı sonuç verdiği (gerçek çıktılar):
+Ölçülmüş sonuç — aynı görev (*"vergi beyannamemi yazmam lazım ama üç gündür bakamıyorum"*), dört kademede:
 
-| Profil | Üretilen ilk hareket |
-|---|---|
-| Profil yok | *"Bilgisayarında vergi beyannamesi belgesini aç ve ekranı öylece bırak."* |
-| Bürokrasi + zor saat | *"Bilgisayarındaki vergi klasörüne tek bir kez tıkla ve orada dur."* |
-| Üç sinyal birden | *"Bilgisayarının kapağına elini koy."* |
+| Kademe | Etkin sinyal | Üretilen ilk hareket |
+|---|---|---|
+| 0 | yok | *"Vergi klasörüne çift tıkla ve aç."* |
+| 1 | bir sinyal | *"Bilgisayarın güç tuşuna bas, masaüstünün açılmasını bekle."* |
+| 2 | iki sinyal | *"Bilgisayarının bulunduğu masaya yürü ve ekranına bak."* |
+| 3 | üç sinyal | *"Sadece bilgisayarın bulunduğu masaya doğru bir adım at."* |
+
+Kademe arttıkça hareket görevden **uzaklaşır**: işin bir parçasını yapmak → yalnızca hazırlık → nesneye dokunmadan mekâna gitmek → görevle hiç temas etmeyen tek bedensel jest.
+
+Etkinin büyüklüğü göreve bağlıdır ve bu bilinçli olarak ölçülmüştür: taban hareketin küçülecek alanı olan görevlerde (bürokrasi, iş/okul) fark kademe 1'den itibaren belirginken, taban çıktısı zaten asgari olan basit fiziksel görevlerde (bulaşık, çöp) fark kademe 2'den sonra ortaya çıkar.
 
 **Ton profili** yalnızca üslubu değiştirir; yasaklı yargı dili listesi hiçbir tercihte esnemez. Aynı görev, iki farklı tonda:
 
@@ -252,8 +257,8 @@ Aynı görev metninin farklı profillerde nasıl farklı sonuç verdiği (gerçe
 **3/3 — zorlanılan zaman dilimi.** Uygulama beyan edilen dilimde açılırsa hareket bir kademe daha küçük başlar:
 ![Tanışma Sohbeti – zaman dilimi](docs/sprint3/urun_tanisma_zaman.png)
 
-**Kişiselleştirilmiş ilk hareket.** Profilinde "ev" bulunan bir kullanıcıda *"bulaşıkları yıkamam lazım ama kalkamıyorum"* görevi, **tek bir çatalı eline almaya** iner — hareket profil sinyaliyle küçültülmüştür:
-![Kişiselleştirilmiş hareket kartı](docs/sprint3/urun_kisisellestirilmis_kart.png)
+**İlk hareket kartı.** *"Bulaşıkları yıkamam lazım ama kalkamıyorum"* girdisine üretilen kart: tek hareket, süre rozeti, yargısız bağlam ve yalnızca iki düğme. Kartın altındaki "Bu bile fazla → küçült" ürünün kalbidir — hayır demenin utançsız yolu:
+![İlk hareket kartı](docs/sprint3/urun_kisisellestirilmis_kart.png)
 
 **Süre sonu kontrolü.** Sayaç bittiğinde ürün *"süren doldu!"* demez; yargısız bir soruyla açılır ve karar kullanıcıya bırakılır. Yapmamak da bir seçenektir:
 ![Süre sonu yargısız kontrol](docs/sprint3/urun_sure_sonu_kontrol.png)
