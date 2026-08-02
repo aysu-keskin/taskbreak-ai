@@ -64,7 +64,7 @@ Puanlama **Fibonacci dizisi (1, 2, 3, 5, 8, 13, 21)** kullanılarak yapılmışt
 | 3 | Ton profili: Ton Bekçisi'nin kullanıcının seçtiği konuşma tarzına (kısa/net, sıcak/eşlikçi) uyarlanması — yasaklı yargı dili tabanı hiçbir tercihte esnemez | 8 | ✅ Tamamlandı |
 | 4 | Deneyim iyileştirmeleri ve bilişsel yük denetimi (ekran başına en fazla bir karar ilkesinin doğrulanması) | 8 | ✅ Tamamlandı |
 | 5 | Canlıya alınabilirlik hazırlığı: sunucu yapılandırmasının ortam değişkenlerine taşınması ve deploy talimatının belgelenmesi *(revize — bkz. yukarıdaki not)* | 5 | ✅ Tamamlandı |
-| 6 | Uçtan uca test ve hata düzeltmeleri | 8 | 🔜 Planlandı |
+| 6 | Uçtan uca test ve hata düzeltmeleri | 8 | ✅ Tamamlandı |
 | 7 | 3 dakikalık tanıtım videosunun hazırlanması ve YouTube'a yüklenmesi | 13 | 🔜 Planlandı |
 | 8 | Final dokümantasyon (mimari, kurulum, kullanım) | 8 | 🔜 Planlandı |
 | 9 | Ürün Teslim Formu'nun doldurulması ve son kontroller | 5 | 🔜 Planlandı |

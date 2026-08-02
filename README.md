@@ -269,6 +269,7 @@ Etkinin büyüklüğü göreve bağlıdır ve bu bilinçli olarak ölçülmüşt
 
 * **Çıktı kalitesi regresyon testi:** 50 görevlik test seti (5 kategoride 10'ar tarif) İlk Hareket Üretici'den geçirildi; her çıktı hem çıktı sözleşmesine hem Ton Bekçisi'ne göre denetlendi. **Sonuç: 50/50 çıktı sözleşmeye uydu**, başarısız görev yok — rapor: [docs/sprint3/test_raporu.md](docs/sprint3/test_raporu.md)
 * **Bilişsel yük denetimi:** Beş ekranın tamamı "ekran başına en fazla bir karar" ölçütüyle tek tek geçildi; sonuç, gerekçelendirilen tek istisnayla birlikte belgelendi: [docs/sprint3/bilissel_yuk_denetimi.md](docs/sprint3/bilissel_yuk_denetimi.md)
+* **Uçtan uca test:** Tanışma Sohbeti'nden kapanış ekranına kadar tüm akış, atlama ve küçültme yolları dahil sınandı; mobil düzen 375 px'te ölçüldü. Test sırasında **üç kullanıcı arayüzü sorunu bulundu ve giderildi**: [docs/sprint3/uctan_uca_test.md](docs/sprint3/uctan_uca_test.md)
 
 #### Sprint Review
 
