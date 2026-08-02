@@ -21,6 +21,8 @@ Sprintin başında planlanan işlerin bir kısmı tamamlandı, bir kısmı kald�
 
 **Kalan iş: ~15,5 saat.** Kullanılabilir süre: 1 Ağustos tam günü + 2 Ağustos 20:00'a kadar ≈ 16 saat. Tampon dardır; bu yüzden aşağıda net bir öncelik sırası ve dondurma kuralı tanımlanmıştır.
 
+**Kapsam kararı (görsel iyileştirme):** Backlog #4'ün puan getiren kısmı — bilişsel yük denetimi — tamamlanmıştır. Arayüzün görsel olarak zenginleştirilmesi ise bilinçli olarak yapılmamıştır. Gerekçe iki yönlüdür: (1) Ürünün tasarım ilkesi **düşük uyaran ve sadeliktir**; donma anındaki bir kullanıcı için görsel zenginlik bir kazanç değil, ek yüktür. Mevcut sade arayüz bu ilkeyle tutarlıdır ve [bilissel_yuk_denetimi.md](bilissel_yuk_denetimi.md) ile ölçülmüştür. (2) Teslim günü görsel değişiklik yapmak, çekilmiş tanıtım videosundaki ekranlarla repodaki ürünün farklılaşmasına yol açardı.
+
 **Kapsam kararı (#10):** Fiyatlandırma sayfası (mock) kapsam dışına alınmıştır. Gerekçe: ürün bir donma anı aracıdır ve arayüzde fiyat/satış öğesi bulunması "ekran başına en fazla bir karar" ilkesiyle çelişir. İş modelinin kendisi belgesiz kalmaz — freemium yapısı, premium fiyatlandırma ve B2B/EAP kanalı [UrunStratejisi.md](../UrunStratejisi.md) §4'te ayrıntısıyla yazılıdır.
 
 ---
@@ -31,7 +33,6 @@ Sprintin başında planlanan işlerin bir kısmı tamamlandı, bir kısmı kald�
 |---|---|---|
 | #5 | Canlıya alınabilirlik hazırlığı — `HOST`/`PORT` ortam değişkenine, prod API adresi desteği, `DEPLOY.md` | 1 sa |
 | #4 | Bilişsel yük denetimi — her ekran "tek karar" ölçütüyle geçilir, fazlalık silinir, mobil kontrol | 1 sa |
-| #4 | Görsel iyileştirme *(zaman kalırsa)* — boşluk, tipografi, geçişler | 1–2 sa |
 | #6 | Uçtan uca test ve hata düzeltmeleri | 1,5 sa |
 | — | Test seti genişletme + koşum raporu *(Sprint 2 borcu)* | 2–3,5 sa |
 | — | Ürün ekran görüntüleri (tanışma, kişiselleştirilmiş kart) | 0,5 sa |
@@ -53,7 +54,6 @@ Sprintin başında planlanan işlerin bir kısmı tamamlandı, bir kısmı kald�
 4. **Canlıya alınabilirlik hazırlığı**
 5. Bilişsel yük denetimi — *"ekran başına en fazla bir karar" ilkesinin doğrulanması; backlog #4'ün kabul kriteri budur*
 6. Test setinin 50'ye tamamlanması *(gerekirse 25'te bırakılır)*
-7. Görsel iyileştirme — *yalnızca zaman kalırsa*
 
 ---
 
@@ -69,7 +69,6 @@ Feda listesindeki işler sonradan tamamlanmak istenirse, güvenle eklenebilme du
 | İş | Risk | En geç |
 |---|---|---|
 | Test seti 25 → 50 | **Yok** — yalnızca JSON kaydı eklenir, kod değişmez | 2 Ağu 17:00 |
-| Görsel iyileştirme | **Orta** — yalnızca `styles.css` ise güvenli; JSX yapısına dokunulursa mobil düzen bozulabilir | **Video çekiminden önce** |
 
 ---
 
@@ -83,7 +82,6 @@ Feda listesindeki işler sonradan tamamlanmak istenirse, güvenle eklenebilme du
 | Öğleden sonra | Test seti genişletme + `test_calistir.bat` + `docs/sprint3/test_raporu.md` |
 | Akşam | Ürün ekran görüntüleri + sprint board görselleri + backlog durum kolonlarının güncellenmesi |
 | Akşam | Daily scrum notu + commit + push |
-| *Zaman kalırsa* | Görsel iyileştirme (`styles.css`) — video çekiminden önce bitmelidir |
 
 > **Not:** Gün planlandığı gibi giderse akşam bir deneme video çekimi yapılır. Pazar sabahı ikinci çekim çok daha hızlı olur ve elde yedek kayıt bulunur.
 

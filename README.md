@@ -27,6 +27,28 @@ Kullanıcı *"şunu yapmam lazım ama başlayamıyorum"* dediğinde ürün ona p
 
 TaskBreak AI bir tedavi veya klinik araç değildir; günlük görev başlatmayı kolaylaştıran bir yardımcıdır.
 
+#### ✨ Ürün Özellikleri
+
+* **Tek mikro hareket** — Dağınık görev metni, katı bir çıktı sözleşmesinden geçen tek bir 1–2 dakikalık fiziksel harekete çevrilir. Liste, plan veya tavsiye üretilmez.
+* **"Bu bile fazla" küçültme** — Verilen hareket bile ağır geldiğinde tek dokunuşla daha küçüğü gelir; sonsuz küçültülebilir. Kullanıcı hiçbir zaman "bunu bile yapamadım" noktasına düşmez.
+* **Ton Bekçisi** — Üretilen her metni denetleyen ikinci bir AI ajanı. Yasaklı yargı dili listesi koda gömülüdür; utandırıcı dil ürüne teknik olarak giremez.
+* **Tanışma Sohbeti ve kişiselleştirme** — Üç soruluk kısa bir sohbetle alınan profil, ilk hareketin boyutunu ve konuşma tonunu belirler.
+* **Sayaç ve body doubling** — Sakin geri sayım ve eşlik metni; süre dolduğunda yargısız kontrol.
+* **Yargısız kapanış** — Devam etmeye zorlayan karanlık desen yoktur; "Bugünlük yeter" de eşit ağırlıkta bir seçenektir.
+* **Kesintisiz çalışma** — Yapay zekâ servisine erişilemediğinde kullanıcı teknik hata görmez, yargısız yedek kart gelir.
+
+#### 🎯 Hedef Kitle
+
+**Birincil kitle:** Görev başlatma güçlüğü (task initiation) yaşayan **ADHD'li yetişkinler.**
+
+Ürün, tanı almış olma şartı aramaz; yapılması gerekeni bilmesine rağmen başlayamama anını yaşayan herkes için çalışır. Kullanım anı bellidir: **kişinin listeye bakamadığı an.**
+
+**Kimin için değil:** Proje planlaması, görev takibi veya yapılacaklar listesi arayanlar. Bu ihtiyaçlar için olgun araçlar zaten vardır; TaskBreak AI onların devreye giremediği anı hedefler.
+
+#### 📋 Product Backlog
+
+Proje 300 puanlık backlog üzerinden üç sprinte bölünmüştür: 📄 [docs/ProductBacklog.md](docs/ProductBacklog.md)
+
 ---
 
 ### 🏗️ Mimari ve Teknik Kararlar
@@ -198,7 +220,7 @@ Ayrıca Sprint 2'den devreden borçlar bu sprintte kapatıldı: test seti 50 gö
 
 #### Tamamlanan Puan ve Mantığı
 
-* **Sprint 3 planlanan:** 100 puan → **kapsam revizyonu sonrası hedef: 89 puan** · **Tamamlanan: […]**
+* **Sprint 3 planlanan:** 100 puan → **kapsam revizyonu sonrası hedef: 89 puan** · **Tamamlanan: 89 puan** ✅
 * Backlog'daki #1, #2 ve #3 ayrı işler olarak planlanmış olsa da **aynı veri hattını (kullanıcı profili) paylaştıkları için tek gövde halinde geliştirildi**; bu, 42 puanlık işin tek ve tutarlı bir mimari üzerinden çıkmasını sağladı.
 
 | # | İş | Puan | Durum |
@@ -209,9 +231,9 @@ Ayrıca Sprint 2'den devreden borçlar bu sprintte kapatıldı: test seti 50 gö
 | 4 | Deneyim iyileştirmeleri ve bilişsel yük denetimi | 8 | ✅ Tamamlandı |
 | 5 | Canlıya alınabilirlik hazırlığı *(revize)* | 5 | ✅ Tamamlandı |
 | 6 | Uçtan uca test ve hata düzeltmeleri | 8 | ✅ Tamamlandı |
-| 7 | 3 dakikalık tanıtım videosu | 13 | […] |
+| 7 | 3 dakikalık tanıtım videosu | 13 | ✅ Tamamlandı |
 | 8 | Final dokümantasyon | 8 | ✅ Tamamlandı |
-| 9 | Ürün Teslim Formu ve son kontroller | 5 | […] |
+| 9 | Ürün Teslim Formu ve son kontroller | 5 | ✅ Tamamlandı |
 | — | *Sprint 2 borcu:* test seti 10 → 50 + koşum raporu | (8) | ✅ Tamamlandı |
 
 #### Daily Scrum
@@ -263,7 +285,7 @@ Etkinin büyüklüğü göreve bağlıdır ve bu bilinçli olarak ölçülmüşt
 **Süre sonu kontrolü.** Sayaç bittiğinde ürün *"süren doldu!"* demez; yargısız bir soruyla açılır ve karar kullanıcıya bırakılır. Yapmamak da bir seçenektir:
 ![Süre sonu yargısız kontrol](docs/sprint3/urun_sure_sonu_kontrol.png)
 
-🎬 **3 dakikalık tanıtım videosu:** […]
+🎬 **3 dakikalık tanıtım videosu:** YouTube'a "Liste Dışı" olarak yüklenmiş ve bağlantısı Ürün Teslim Formu üzerinden iletilmiştir. Video, ürünün donma anı akışını, "Bu bile fazla" küçültmesini, kişiselleştirmeyi ve iki ajanlı mimariyi canlı olarak göstermektedir.
 
 #### Kalite Doğrulaması
 
