@@ -208,9 +208,9 @@ Ayrıca Sprint 2'den devreden borçlar bu sprintte kapatıldı: test seti 50 gö
 | 3 | Ton profili — Ton Bekçisi'nin uyarlanması | 8 | ✅ Tamamlandı |
 | 4 | Deneyim iyileştirmeleri ve bilişsel yük denetimi | 8 | ✅ Tamamlandı |
 | 5 | Canlıya alınabilirlik hazırlığı *(revize)* | 5 | ✅ Tamamlandı |
-| 6 | Uçtan uca test ve hata düzeltmeleri | 8 | […] |
+| 6 | Uçtan uca test ve hata düzeltmeleri | 8 | ✅ Tamamlandı |
 | 7 | 3 dakikalık tanıtım videosu | 13 | […] |
-| 8 | Final dokümantasyon | 8 | […] |
+| 8 | Final dokümantasyon | 8 | ✅ Tamamlandı |
 | 9 | Ürün Teslim Formu ve son kontroller | 5 | […] |
 | — | *Sprint 2 borcu:* test seti 10 → 50 + koşum raporu | (8) | ✅ Tamamlandı |
 
@@ -278,12 +278,16 @@ Etkinin büyüklüğü göreve bağlıdır ve bu bilinçli olarak ölçülmüşt
 * Canlıya alma bilinçli olarak kapsam dışında bırakıldı; ürün deploy edilebilir halde bırakıldı ve talimatı, bilinen sınırlarıyla birlikte belgelendi.
 * **Denetimler iki gerçek hata ortaya çıkardı ve ikisi de giderildi:** (1) sayaç ekranında süre uzatıldığında "süre doldu" kontrolü ekranda takılı kalıyordu; (2) test koşucusu Windows konsolunun Türkçe kod sayfasında `UnicodeEncodeError` ile çöküyordu — bu, test setinin daha önce koşulamamış olmasını da açıklamaktadır.
 * Sprint 2'den devreden borçlar kapatıldı: test seti 50 göreve tamamlandı, Sprint 2 sprint board görseli eklendi.
-* […Ekip katılımı ve kalan işlerle ilgili değerlendirme…]
+* Ekip içindeki iş bölümü bu sprintte de eşit dağılmadı; geliştirme Product Owner'da yoğunlaştı. Buğra ürün kararlarına ve önceliklendirmeye fikir vererek, Yeliz ise tanıtım videosunun hazırlanmasını üstlenerek katkı verdi. Ancak ekip içi iletişimdeki aksama önceki sprintlerde görülen gecikmeyi tekrarladı: sprintin ilk on bir günü commit'siz geçti ve geliştirme son iki güne yığıldı. Kapsam bu gerçeğe göre iki kez daraltıldı (#5 canlıya alma, #10 fiyatlandırma); her iki karar gerekçesiyle birlikte backlog'a ve yürütme planına işlendi. Sprint hedefinin ürün tarafı buna rağmen tamamlandı.
 
 #### Sprint Retrospective
 
 * **İyi gidenler:** Backlog'da ayrı görünen üç işin aynı veri hattını paylaştığı fark edildi ve tek gövde halinde geliştirilerek zaman kazanıldı. Kapsam kararları erken alınıp gerekçeleriyle belgelendi; bu, teslim baskısı altında ne feda edileceğinin tartışılmasını önledi.
-* **Zorluklar:** […]
+* **Zorluklar:** Ekip içi iletişimdeki aksama, önceki sprintlerde de yaşanan gecikmeyi yeniden getirdi — sprintin ilk on bir günü commit'siz geçti ve geliştirme son iki güne yığıldı. Sprint 2 retrospektifinde alınan "düzenli ve yazılı check-in" kararı bu sprintte de tam olarak hayata geçirilemedi.
+
+  Teknik tarafta üç engelle karşılaşıldı ve üçü de sprint içinde çözüldü: test koşucusu Windows konsolunun Türkçe kod sayfasında çöküyor ve test setinin koşulmasını engelliyordu; kullanılan modelin ücretsiz katmandaki günlük limiti (20 istek) hem regresyon testini hem normal kullanımı imkânsız kılıyordu; Türkçe'nin eklemeli yapısı, geçmiş görevlerin kelime tabanlı eşleştirilmesini boşa çıkarıyordu.
+
+  **En öğretici bulgu doğrulamanın zamanlamasıyla ilgilidir.** Kişiselleştirmenin ilk ölçümde beklenen boyut farkını üretmediği, küçültme akışının aynı bağlam cümlesini tekrarladığı ve sayaç ekranının süre uzatıldığında takıldığı ancak sprintin sonunda, ürün gerçekten kullanıldığında ortaya çıktı. Bu sorunların hiçbiri kod okunarak değil, ürün denenerek bulundu; doğrulama sprintin sonuna bırakılmamalıydı.
 * **Bootcamp sonrası yol haritası:** Canlıya alma (Render + Vercel — hazırlığı tamamlandı), hafızanın kalıcı bir veri katmanına taşınması, çok kullanıcılı kullanım için oturum katmanı, test setinin gerçek kullanıcı verisiyle genişletilmesi.
 
 </details>
